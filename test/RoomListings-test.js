@@ -1,7 +1,16 @@
 import chai from 'chai';
+import BookingsLog from '../src/classes/BookingsLog';
+import RoomListings from '../src/classes/RoomListings';
 const expect = chai.expect;
+import sampleData from '../src/sampleData';
 
 describe('RoomListings', () => {
+  let roomListings, bookingsLog;
+
+  beforeEach(() => {
+    bookingsLog = new BookingsLog(sampleData.bookings)
+    roomListings = new RoomListings(sampleData.rooms)
+  });
 
   it('Should be a function', () => {
     expect(RoomListings).to.be.a('function');

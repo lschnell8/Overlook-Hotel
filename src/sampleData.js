@@ -68,7 +68,7 @@ const rooms = [
     "bedSize": "king",
     "numBeds": 1,
     "costPerNight": 491.14
-  }
+  },
   {
     "number": 4,
     "roomType": "residential suite",

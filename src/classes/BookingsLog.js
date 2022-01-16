@@ -1,6 +1,6 @@
 class BookingsLog {
-  constructor() {
-
+  constructor(bookings) {
+    this.bookings = bookings;
   }
 };
 

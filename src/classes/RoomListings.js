@@ -4,4 +4,4 @@ class RoomListings {
   }
 };
 
-export default RoomListings;
+export default = RoomListings;
