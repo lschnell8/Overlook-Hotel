@@ -1,14 +1,16 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Customer from '../src/classes/Customer';
-import sampleData from '../src/sampleData';
-
+const customers = require('../src/sampleData/customersData')
 
 describe('Customer', () => {
-  let customer;
+  let customer1, customer2, customer3;
 
   beforeEach(() => {
-    customer = new Customer(sampleData.customers)
+    customer1 = new Customer(customers[0].id, customers[0].name);
+    customer2 = new Customer(customers[1].id, customers[1].name);
+    customer3 = new Customer(customers[2].id, customers[2].name);
+
   });
 
   it('Should be a function', () => {
@@ -16,16 +18,16 @@ describe('Customer', () => {
   });
 
   it('Should be an instance of Customer', () => {
-    expect(customer).to.be.an.instanceOf(Customer);
+    expect(customer1).to.be.an.instanceOf(Customer);
   });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
+  it('Should have an id', () => {
+    expect(customer1.id).to.equal(customers[0].id);
+  });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
+  it('Should have a name', () => {
+    expect(customer1.name).to.equal(customers[0].name);
+  });
 
   // it('Should', () => {
   //   expect().to.equal();

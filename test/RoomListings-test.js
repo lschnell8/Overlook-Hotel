@@ -1,15 +1,13 @@
 import chai from 'chai';
-import BookingsLog from '../src/classes/BookingsLog';
 import RoomListings from '../src/classes/RoomListings';
 const expect = chai.expect;
-import sampleData from '../src/sampleData';
+const rooms = require('../src/sampleData/roomsData');
 
 describe('RoomListings', () => {
-  let roomListings, bookingsLog;
+  let roomListings;
 
   beforeEach(() => {
-    bookingsLog = new BookingsLog(sampleData.bookings)
-    roomListings = new RoomListings(sampleData.rooms)
+    roomListings = new RoomListings(rooms)
   });
 
   it('Should be a function', () => {
@@ -20,9 +18,9 @@ describe('RoomListings', () => {
     expect(roomListings).to.be.an.instanceOf(RoomListings);
   });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
+  it('Should hold all hotel rooms', () => {
+    expect(roomListings.hotelRooms).to.equal(rooms);
+  });
 
   // it('Should', () => {
   //   expect().to.equal();

@@ -1,7 +1,7 @@
 class RoomListings {
-  constructor() {
-
+  constructor(rooms) {
+    this.hotelRooms = rooms;
   }
 };
 
-export default = RoomListings;
+export default RoomListings;
