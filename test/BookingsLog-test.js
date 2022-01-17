@@ -37,18 +37,24 @@ describe('BookingsLog', () => {
   });
 
   it('Should calculate the total amount a customer has spent on room bookings', () => {
-    // bookingsLog.getCustomerBookings(customer1)
     expect(bookingsLog.calculateTotalSpent(roomListings, customer1)).to.equal(835.78);
 
-    // bookingsLog.getCustomerBookings(customer2)
-    expect(bookingsLog.calculateTotalSpent(roomListings, customer2)).to.equal(358.40);
+    expect(bookingsLog.calculateTotalSpent(roomListings, customer2)).to.equal(491.14);
 
-    // bookingsLog.getCustomerBookings(customer3)
     expect(bookingsLog.calculateTotalSpent(roomListings, customer3)).to.equal(0);
   });
 
-  it('Should ', () => {
-    expect().to.equal();
+  it('Should filter available rooms by a selected date for a customer', () => {
+    expect(bookingsLog.getAvailableRooms("2022/02/05", roomListings.hotelRooms)).to.deep.equal([rooms[1], rooms[2], rooms[3]]);
+
+    expect(bookingsLog.getAvailableRooms("2022/01/10", roomListings.hotelRooms)).to.deep.equal([rooms[0], rooms[1], rooms[2]]);
+
+    expect(bookingsLog.getAvailableRooms("2022/01/12", roomListings.hotelRooms)).to.deep.equal([rooms[0], rooms[1], rooms[2], rooms[3]]);
+
+    //THIS TEST PASSES WITH A SECOND SET OF SAMPLE BOOKINGS DATA THAT ARE ALL BOOKED FOR 2022/01/11 AND IS COMMENTED OUT IN THE SAME FILE
+
+    // expect(bookingsLog.getAvailableRooms("2022/01/11", roomListings.hotelRooms)).to.equal(`Sorry friend! There aren't any rooms available for 2022/01/11. Please try another date`);
+
   });
 
   // it('Should', () => {
