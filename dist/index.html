@@ -4,10 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Overlook Hotel</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <header>
+    <h1>Overlook Hotel</h1>
+  </header>
+  <form class="log-in hidden">
+    <div>
+      <label for="userName">Username:</label>
+      <input autofocus type="text" placeholder="User Name">
+      <label for="password">Password:</label>
+      <input type="password" placeholder="Password">
+    </div>
+  </form>
+  <section class="dash-board">
+    <h1>Welcome Customer!</h1>
+    <nav>
+      <label>Check In Date:</label>
+      <input type="date" min="">
+      <label>Select A Roomtype:</label>
+      <select>
+        <option value="0"></option>
+        <option value="single room">Single Room</option>
+        <option value="suite">Suite</option>
+        <option value="junior suite">Junior Suite</option>
+        <option value="residential suite">Residential Suite</option>
+      </select>
+    </nav>
+    <h2>You have spent $1M on rooms!</h2>
+  </section>
+  <section class="available-rooms hidden">
+    <!-- insertAdjacentHTML for room card displays -->
+    <article>
+      <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
+    </article>
+    <article>
+    </article>
+  </section>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
