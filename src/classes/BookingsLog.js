@@ -41,9 +41,14 @@ class BookingsLog {
     }
   } 
 
-  getAvailableRoomsByType(type) {
+  getAvailableRoomsByType(type, date, roomListings) {
     const availableRooms = this.getAvailableRooms(date, roomListings);
-    return availableRooms.filter(room => room.roomType === type)
+    const roomsByType = availableRooms.filter(room => room.roomType === type)
+    if (!roomsByType.length) {
+      return `There are no ${type}s available. Please select another room type.`
+    } else {
+      return roomsByType
+    }
   }
 
 };
