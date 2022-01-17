@@ -29,32 +29,4 @@ describe('Customer', () => {
     expect(customer1.name).to.equal(customers[0].name);
   });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
 });

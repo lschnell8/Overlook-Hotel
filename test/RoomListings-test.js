@@ -22,40 +22,4 @@ describe('RoomListings', () => {
     expect(roomListings.hotelRooms).to.equal(rooms);
   });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
 });

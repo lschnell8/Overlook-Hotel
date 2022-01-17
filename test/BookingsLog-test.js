@@ -64,24 +64,4 @@ describe('BookingsLog', () => {
     expect(bookingsLog.getAvailableRoomsByType('junior suite', '2022/01/12', roomListings.hotelRooms)).to.equal(`There are no junior suites available. Please select another room type.`);
   });
 
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
-  // it('Should', () => {
-  //   expect().to.equal();
-  // });
-
 });
