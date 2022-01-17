@@ -31,6 +31,6 @@ const instantiateClasses = () => {
     let customerListing = data[2];
     customer = new Customer(customerListing.customers[0]);
   }
-}
+};
 
 window.addEventListener('load', loadData())
