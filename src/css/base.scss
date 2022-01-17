@@ -12,14 +12,19 @@ body {
   // background: $primary-background;
 }
 
+h2 {
+  height: fit-content;
+}
+
 .log-in {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
 }
 
 div {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

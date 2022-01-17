@@ -8,39 +8,61 @@
 </head>
 <body>
   <header>
-    <h1>Overlook Hotel</h1>
+    <h1>Welcome To Overlook Hotel!</h1>
   </header>
   <form class="log-in hidden">
+    <h2>Please log in to continue...</h2>
     <div>
       <label for="userName">Username:</label>
-      <input autofocus type="text" placeholder="User Name">
+      <input autofocus class="username-input" id="usernameInput" type="text" placeholder="customer + id">
       <label for="password">Password:</label>
-      <input type="password" placeholder="Password">
+      <input class="password-input" id="passwordInput" type="password" placeholder="Password">
+      <button type="submit">Log In</button>
     </div>
   </form>
   <section class="dash-board">
     <h1>Welcome Customer!</h1>
-    <nav>
+    <form class="room-search">
       <label>Check In Date:</label>
       <input type="date" min="">
       <label>Select A Roomtype:</label>
       <select>
-        <option value="0"></option>
+        <option value="0">Optional Selection</option>
         <option value="single room">Single Room</option>
         <option value="suite">Suite</option>
         <option value="junior suite">Junior Suite</option>
         <option value="residential suite">Residential Suite</option>
       </select>
-    </nav>
+      <button id="findAvailableRoomsBtn">Find Available Rooms</button>
+    </form>
     <h2>You have spent $1M on rooms!</h2>
   </section>
-  <section class="available-rooms hidden">
+  <section class="available-rooms hidden" id="availableRooms">
     <!-- insertAdjacentHTML for room card displays -->
     <article>
+      <h3>Room Type</h3>
+      <h4>Features:</h4>
+      <ul>
+        <li>Bidet</li>
+        <li>numBeds and bedSize</li>
+      </ul>
       <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
     </article>
     <article>
     </article>
+  </section>
+  <section class="booking-a-room">
+    <article class="selected-room">
+    <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
+      <h3>Room Type</h3>
+      <h4>Features</h4>
+      <ul>
+        <li>Bidet</li>
+        <li>numBeds and bedSize</li>
+      </ul>
+      <h5>costPerNight</h5>
+    </article>
+    <button>Book My Room</button>
   </section>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
