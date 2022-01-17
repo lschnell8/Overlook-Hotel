@@ -1,6 +1,6 @@
 class RoomListings {
-  constructor() {
-
+  constructor(rooms) {
+    this.hotelRooms = rooms;
   }
 };
 
