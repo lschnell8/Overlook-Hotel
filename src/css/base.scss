@@ -14,6 +14,7 @@ body {
 
 h2 {
   height: fit-content;
+  margin-left: .5em;
 }
 
 .log-in {
@@ -27,7 +28,6 @@ h2 {
 div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .dash-board {
@@ -37,23 +37,33 @@ div {
 }
 
 h1 {
+  height: fit-content;
+  margin-left: 1em;
+}
+
+.bookings-display {
   flex: 1;
+  padding-left: .5em;
 }
 
 .amount-spent {
   align-self: flex-end;
+  margin-bottom: 2em;
 }
 
 .room-search {
   display: flex;
   flex-direction: column;
   flex: 1;
+  align-items: center;
+  justify-content: center;
 }
 
 button, input, select {
   width: fit-content;
   font-size: 1em;
-  height: fit-content;
+  height: 2em;
+  border-radius: 2px;
 }
 
 label {
@@ -81,6 +91,12 @@ label {
 .selected-room {
   width: 25em;
   height: 25em;
+}
+
+li {
+  list-style: none;
+  width: fit-content;
+  margin-left: 1em;
 }
 
 .hidden {
