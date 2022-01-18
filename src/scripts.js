@@ -16,7 +16,7 @@ import './images/turing-logo.png'
 //QUERY SELECTORS
 
 //BUTTONS
-const logInBtn = document.getElementById('logInBtn');
+const logInForm = document.getElementById('logIn');
 const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
 const backToDashBtn = document.getElementById('backToDashBtn');
 // const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
@@ -47,36 +47,40 @@ let bookingsLog, roomListings, customer;
 
 //EXECUTION FUNCTIONS
 const loadData = () => {
-  getData()
-    .then(data => {
-      // console.log(data[0].bookings, data[1].rooms, data[2])
-      bookingsLog = new BookingsLog(data[0].bookings);
-      roomListings = new RoomListings(data[1].rooms);
-      // let customerListing = data[2];
-      // customer = new Customer(customerListing.customers[0]);
-      customer = new Customer(data[2]);
-      console.log('THIS ONE', bookingsLog, roomListings, customer)
-    })
-};
-
-const logIn = () => {
-  // let customerId = getCustomerId();
-  // console.log('OG', customerId)
   // getData()
   //   .then(data => {
-  //     bookingsLog = new BookingsLog(data[0]);
-  //     roomListings = new RoomListings(data[1]);
+  //     // console.log(data[0].bookings, data[1].rooms, data[2])
+  //     bookingsLog = new BookingsLog(data[0].bookings);
+  //     roomListings = new RoomListings(data[1].rooms);
+  //     // let customerListing = data[2];
+  //     // customer = new Customer(customerListing.customers[0]);
   //     customer = new Customer(data[2]);
+  //     console.log('THIS ONE', bookingsLog, roomListings, customer)
   //   })
-  //   // .then(data => instantiateClassInstances(data))
-  console.log('THERE', bookingsLog)
+};
+
+const logIn = (event) => {
+  event.preventDefault();
+  // let customerId = getCustomerId();
+  let id = usernameInput.value.split('r')[1];
+  console.log('OG', id)
+  getData(id)
+    // .then(data => {
+    //   bookingsLog = new BookingsLog(data[0]);
+    //   roomListings = new RoomListings(data[1]);
+    //   customer = new Customer(data[2]);
+    // })
+    .then(data => instantiateClassInstances(data))
+  // console.log('BookingsLog', bookingsLog)
+  // console.log('RoomListings', roomListings)
+  // console.log('Customer', customer)
   // domUpdates.displayDashboard(customer.name, amount);
 };
 
 
 //HELPER FUNCTIONS
-const getData = () => {
-  return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', 1)])
+const getData = (id) => {
+  return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)])
 };
 
 const instantiateClassInstances = (data) => {
@@ -86,21 +90,21 @@ const instantiateClassInstances = (data) => {
   // let customerListing = data[2];
   // customer = new Customer(customerListing.customers[0]);
   // customer = new Customer(data[2])
-  console.log('HERE', bookingsLog.bookings)
+  console.log('HERE', bookingsLog)
 };
 
-const getCustomerId = () => {
-  let value = usernameInput.value;
-  let id = value.split('r');
-  console.log('THIS', value, id);
-  return id
-};
+// const getCustomerId = () => {
+//   // let value = usernameInput.value;
+//   let id = usernameInput.value.split('r')[1];
+//   console.log('THIS', id);
+//   return id
+// };
 
 
 
 
 //EVENT LISTENERS
 window.addEventListener('load', loadData);
-logInBtn.addEventListener('click', logIn);
+logInForm.addEventListener('submit', logIn);
 // findAvailableRoomsBtn.addEventListener('click', domUpdates.displayAvailableRooms());
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard());
