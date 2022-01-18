@@ -2,27 +2,28 @@ import { fetchApiData } from './apiCalls';
 import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
-// import domUpdates from './domUpdates.js';
+import domUpdates from './domUpdates.js';
+import './domUpdates.js'
+import './css/base.scss';
 
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
 // An example of how you tell webpack to use a CSS (SCSS) file
-import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// import './images/turing-logo.png'
 
 //QUERY SELECTORS
 
-//BUTTONS
+//BUTTONS AND SUBMITS
 const logInForm = document.getElementById('logIn');
-const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
-const backToDashBtn = document.getElementById('backToDashBtn');
+// const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
+// const backToDashBtn = document.getElementById('backToDashBtn');
 // const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
 
 //INPUTS
-const usernameInput = document.getElementById('usernameInput');
+// const usernameInput = document.getElementById('usernameInput');
 // const passwordInput = document.getElementById('passwordInput');
 // const dateInput = document.getElementById('dateInput');
 // const roomTypeSelection = document.getElementById('roomTypeSelection');
@@ -42,65 +43,41 @@ const usernameInput = document.getElementById('usernameInput');
 
 
 //GLOBAL VARIABLES
-let bookingsLog, roomListings, customer;
+var bookingsLog, roomListings, customer;
 
 
 //EXECUTION FUNCTIONS
 const loadData = () => {
-  // getData()
-  //   .then(data => {
-  //     // console.log(data[0].bookings, data[1].rooms, data[2])
-  //     bookingsLog = new BookingsLog(data[0].bookings);
-  //     roomListings = new RoomListings(data[1].rooms);
-  //     // let customerListing = data[2];
-  //     // customer = new Customer(customerListing.customers[0]);
-  //     customer = new Customer(data[2]);
-  //     console.log('THIS ONE', bookingsLog, roomListings, customer)
-  //   })
+  
 };
 
 const logIn = (event) => {
   event.preventDefault();
-  // let customerId = getCustomerId();
   let id = usernameInput.value.split('r')[1];
-  console.log('OG', id)
   getData(id)
-    // .then(data => {
-    //   bookingsLog = new BookingsLog(data[0]);
-    //   roomListings = new RoomListings(data[1]);
-    //   customer = new Customer(data[2]);
-    // })
-    .then(data => instantiateClassInstances(data))
-  // console.log('BookingsLog', bookingsLog)
-  // console.log('RoomListings', roomListings)
-  // console.log('Customer', customer)
-  // domUpdates.displayDashboard(customer.name, amount);
+  // .then(data => instantiateClassInstances(data));
+  // .then(console.log('Global bookingsLog 3', bookingsLog, 'Global customer 3', customer, 'Global roomListings 3', roomListings))
+  // console.log('Global bookingsLog 3', bookingsLog)
+  // console.log('Global customer 3', customer)
+  // console.log('Global roomListings 3', roomListings)
+  // domUpdates.displayDashboard(customer, bookingsLog.bookings);
 };
 
 
 //HELPER FUNCTIONS
 const getData = (id) => {
-  return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)])
+  return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data));
 };
 
 const instantiateClassInstances = (data) => {
-  console.log(data)
-  bookingsLog = new BookingsLog(data[0]);
-  roomListings = new RoomListings(data[1]);
-  // let customerListing = data[2];
-  // customer = new Customer(customerListing.customers[0]);
-  customer = new Customer(data[2])
-  console.log('HERE', customer)
+  console.log('DATA 1', data[0])
+  bookingsLog = new BookingsLog(data[0].bookings);
+  roomListings = new RoomListings(data[1].rooms);
+  customer = new Customer(data[2]);
+  console.log('BookingsLog Instantiation 2', bookingsLog)
+  console.log('Customer Instantiation 2', customer)
+  console.log('RoomListings Instantiation 2', roomListings)
 };
-
-// const getCustomerId = () => {
-//   // let value = usernameInput.value;
-//   let id = usernameInput.value.split('r')[1];
-//   console.log('THIS', id);
-//   return id
-// };
-
-
 
 
 //EVENT LISTENERS

@@ -1,8 +1,13 @@
-// import BookingsLog from './classes/BookingsLog';
-// import RoomListings from './classes/RoomListings';
-// import Customer from './classes/Customer';
+import BookingsLog from './classes/BookingsLog';
+import RoomListings from './classes/RoomListings';
+import Customer from './classes/Customer';
 
-const logInPage = document.getElementById('logIn');
+// const logInPage = document.getElementById('logIn');
+let bookingsLog, roomListings, customer;
+
+
+// const usernameInput = document.getElementById('usernameInput');
+// const logInForm = document.getElementById('logIn');
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.getElementsByClassName('bookings-display');
 const availableRooms = document.getElementById('availableRooms');
@@ -11,8 +16,8 @@ const bookingARoom = document.getElementById('bookingARoom');
 let domUpdates = {
   //DISPLAY FUNCTIONS
 
-  displayDashboard() {
-    const amount = bookingsLog.calculateTotalSpent();
+  displayDashboard(customer, bookingsLog) {
+    const amount = bookingsLog.calculateTotalSpent(roomListings, customer);
     bookingsDisplay.insertAdjacentHTML('afterbegin',
       `<h1>Hi ${customer.name}!</h1>
     <h3> My Bookings </h3>`);
@@ -27,7 +32,7 @@ let domUpdates = {
     bookingsDisplay.insertAdjacentHTML('afterend',
       `<h2 class="amount-spent" id="amountSpent">You have spent ${amount} on rooms!</h2>`);
 
-    this.hide([logInPage]);
+    this.hide([logInForm]);
     this.show([dashboard]);
   },
 
@@ -39,7 +44,7 @@ let domUpdates = {
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
     })
-    this.hide([logInPage, dashboard]);
+    this.hide([logInForm, dashboard]);
     this.show([availableRooms]);
   },
 
@@ -65,7 +70,7 @@ let domUpdates = {
           </article>`)
       }
     })
-    this.hide([logInPage, dashboard]);
+    this.hide([logInForm, dashboard]);
     this.show([bookingARoom]);
   },
 
