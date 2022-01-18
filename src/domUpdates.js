@@ -4,27 +4,69 @@
 
 const logInPage = document.getElementById('logIn');
 const dashboard = document.getElementById('dashboard');
+const bookingsDisplay = document.getElementsByClassName('bookings-display');
 const availableRooms = document.getElementById('availableRooms');
 const bookingARoom = document.getElementById('bookingARoom');
 
 let domUpdates = {
   //DISPLAY FUNCTIONS
 
-  displayDashboard() { //params name, amount
-    // dashboard.insertAdjacentHTML('afterbegin', `<h1>Hi ${name}!</h1>
-    // <h2 class="amount-spent" id="amountSpent">You have spent ${amount} on rooms!</h2>`);
-    this.show([dashboard]);
+  displayDashboard() {
+    const amount = bookingsLog.calculateTotalSpent();
+    bookingsDisplay.insertAdjacentHTML('afterbegin',
+      `<h1>Hi ${customer.name}!</h1>
+    <h3> My Bookings </h3>`);
+
+    bookingsDisplay.insertAdjacentHTML('beforeend', 
+    `<article>
+      <li>Date: ${booking.date}</li>
+      <li>Room Number: ${booking.roomNumber}</li>
+      <li>Confirmation Number: ${booking.id}</li>
+    </article>`)
+      
+    bookingsDisplay.insertAdjacentHTML('afterend',
+      `<h2 class="amount-spent" id="amountSpent">You have spent ${amount} on rooms!</h2>`);
+
     this.hide([logInPage]);
+    this.show([dashboard]);
   },
 
   displayAvailableRooms() {
-    this.show([availableRooms]);
+    availableRooms.innerHTML = '';
+    let roomsToDisplay = bookingsLog.getAvailableRooms(dateInput.value, roomListings);
+    roomsToDisplay.forEach(room => {
+      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
+      <h3>${room.roomType}</h3>
+      <h4>${room.numBeds} ${room.bedSize}</h4>`)
+    })
     this.hide([logInPage, dashboard]);
+    this.show([availableRooms]);
   },
 
-  displayBookingARoom() {
-    this.show([bookingARoom]);
+  displayBookingARoom(event) {
+    roomListings.find(room => {
+      if (event.target.closest(room.id)) {
+        // [!room.bidet] = 'No'
+        // [room.bidet] = 'Yes'
+        if (!room.bidet) {
+          room.bidet = 'No'
+        } else {
+          room.bidet = 'Yes'
+        }
+        bookingARoom.insertAdjacentHTML('afterbegin',
+          `<article class="selected-room">
+            <h3>${room.roomType}</h3>
+            <h4>Features</h4>
+            <ul>
+              <li>Bidet: ${room.bidet} </li>
+              <li>${room.numBeds} ${room.bedSize}</li>
+            </ul>
+            <h5>Cost Per Night: ${room.costPerNight}</h5>
+          </article>`)
+      }
+    })
     this.hide([logInPage, dashboard]);
+    this.show([bookingARoom]);
   },
 
 
