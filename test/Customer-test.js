@@ -7,9 +7,9 @@ describe('Customer', () => {
   let customer1, customer2, customer3;
 
   beforeEach(() => {
-    customer1 = new Customer(customers[0].id, customers[0].name);
-    customer2 = new Customer(customers[1].id, customers[1].name);
-    customer3 = new Customer(customers[2].id, customers[2].name);
+    customer1 = new Customer(customers[0]);
+    customer2 = new Customer(customers[1]);
+    customer3 = new Customer(customers[2]);
 
   });
 
