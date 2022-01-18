@@ -1,6 +1,88 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
 
+* {
+  border: 1px solid blue;
+}
+
 body {
-  background: $primary-background;
+  overscroll-behavior: none;
+  margin: 0;
+  font-size: 1.55em;
+  // background: $primary-background;
+}
+
+h2 {
+  height: fit-content;
+}
+
+.log-in {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dash-board {
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+h1 {
+  flex: 1;
+}
+
+.amount-spent {
+  align-self: flex-end;
+}
+
+.room-search {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+button, input, select {
+  width: fit-content;
+  font-size: 1em;
+  height: fit-content;
+}
+
+label {
+  font-size: 1.25em;
+}
+
+.available-rooms {
+  height: 100vh;
+}
+
+.available-room-card {
+  width: 15em;
+  height: 15em;
+  margin: 1em 0 0 1em;
+}
+
+.booking-a-room {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected-room {
+  width: 25em;
+  height: 25em;
+}
+
+.hidden {
+  display: none;
 }

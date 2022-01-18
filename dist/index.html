@@ -4,10 +4,63 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Overlook Hotel</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <header>
+    <h1>Welcome To Overlook Hotel!</h1>
+  </header>
+  <form class="log-in">
+    <h2>Please log in to continue...</h2>
+    <div>
+      <label for="userName">Username:</label>
+      <input autofocus class="username-input" id="usernameInput" type="text" placeholder="customer + id">
+      <label for="password">Password:</label>
+      <input class="password-input" id="passwordInput" type="password" placeholder="Password">
+      <button type="submit">Log In</button>
+    </div>
+  </form>
+  <section class="dash-board hidden">
+    <h1>Hi Customer!</h1>
+    <h2 class="amount-spent">You have spent $1M on rooms!</h2>
+    <form class="room-search">
+      <h2>Book A Room</h3>
+      <label>Check In Date:</label>
+      <input type="date" min="">
+      <button id="findAvailableRoomsBtn">Find Available Rooms</button>
+    </form>
+  </section>
+  <section class="available-rooms hidden" id="availableRooms">
+      <label>See Only Options For:</label>
+      <select>
+        <option value="0">Select A Room Type</option>
+        <option value="single room">Single Room</option>
+        <option value="suite">Suite</option>
+        <option value="junior suite">Junior Suite</option>
+        <option value="residential suite">Residential Suite</option>
+      </select>
+    <!-- insertAdjacentHTML for customer bookings card displays -->
+    <article class="available-room-card">
+      <h3>Room Type</h3>
+      <h4>numBeds and bedSize</h4>
+      <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
+    </article>
+    <article>
+    </article>
+  </section>
+  <section class="booking-a-room hidden">
+    <article class="selected-room">
+    <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
+      <h3>Room Type</h3>
+      <h4>Features</h4>
+      <ul>
+        <li>Bidet</li>
+        <li>numBeds and bedSize</li>
+      </ul>
+      <h5>costPerNight</h5>
+    </article>
+    <button>Book My Room</button>
+  </section>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
