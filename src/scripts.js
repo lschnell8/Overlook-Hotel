@@ -89,8 +89,8 @@ const instantiateClassInstances = (data) => {
   roomListings = new RoomListings(data[1]);
   // let customerListing = data[2];
   // customer = new Customer(customerListing.customers[0]);
-  // customer = new Customer(data[2])
-  console.log('HERE', bookingsLog)
+  customer = new Customer(data[2])
+  console.log('HERE', customer)
 };
 
 // const getCustomerId = () => {
