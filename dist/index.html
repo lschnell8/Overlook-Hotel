@@ -15,15 +15,23 @@
     <h2>Please log in to continue...</h2>
     <div>
       <label for="userName">Username:</label>
-      <input class="username-input" type="text" id="usernameInput" required>
+      <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
       <label for="password">Password:</label>
       <input class="password-input" id="passwordInput" type="password" placeholder="Password">
       <button type="submit" id="logInBtn">Log In</button>
     </div>
   </form>
   <section class="dash-board hidden" id="dashboard">
-    <!-- <h1>Hi Customer!</h1>
-    <h2 class="amount-spent" id="amountSpent">You have spent $1M on rooms!</h2> -->
+    <div class="bookings-display">
+      <!-- <h1>Hi Customer!</h1>
+      <h3>My Bookings</h3>
+      <article>
+        <li>Date: booking.date</li>
+        <li>Room number: booking.roomNumber</li>
+        <li>Confirmation number: booking.id</li>
+      </article> -->
+    </div>
+    <h2 class="amount-spent" id="amountSpent">You have spent $1M on rooms!</h2>
     <form class="room-search">
       <h2>Book A Room</h3>
       <label>Check In Date:</label>
@@ -50,16 +58,16 @@
     </article>
   </section>
   <section class="booking-a-room hidden" id="bookingARoom">
-    <article class="selected-room">
+    <!-- <article class="selected-room"> -->
     <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
-      <h3>Room Type</h3>
+      <!-- <h3>Room Type</h3>
       <h4>Features</h4>
       <ul>
         <li>Bidet</li>
         <li>numBeds and bedSize</li>
       </ul>
       <h5>costPerNight</h5>
-    </article>
+    </article> -->
     <button id="bookMyRoomBtn">Book My Room</button>
   </section>
   
