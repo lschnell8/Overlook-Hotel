@@ -10,7 +10,7 @@
   <header>
     <h1>Welcome To Overlook Hotel!</h1>
   </header>
-  <form class="log-in hidden">
+  <form class="log-in">
     <h2>Please log in to continue...</h2>
     <div>
       <label for="userName">Username:</label>
@@ -20,38 +20,35 @@
       <button type="submit">Log In</button>
     </div>
   </form>
-  <section class="dash-board">
-    <h1>Welcome Customer!</h1>
+  <section class="dash-board hidden">
+    <h1>Hi Customer!</h1>
+    <h2 class="amount-spent">You have spent $1M on rooms!</h2>
     <form class="room-search">
+      <h2>Book A Room</h3>
       <label>Check In Date:</label>
       <input type="date" min="">
-      <label>Select A Roomtype:</label>
+      <button id="findAvailableRoomsBtn">Find Available Rooms</button>
+    </form>
+  </section>
+  <section class="available-rooms hidden" id="availableRooms">
+      <label>See Only Options For:</label>
       <select>
-        <option value="0">Optional Selection</option>
+        <option value="0">Select A Room Type</option>
         <option value="single room">Single Room</option>
         <option value="suite">Suite</option>
         <option value="junior suite">Junior Suite</option>
         <option value="residential suite">Residential Suite</option>
       </select>
-      <button id="findAvailableRoomsBtn">Find Available Rooms</button>
-    </form>
-    <h2>You have spent $1M on rooms!</h2>
-  </section>
-  <section class="available-rooms hidden" id="availableRooms">
-    <!-- insertAdjacentHTML for room card displays -->
-    <article>
+    <!-- insertAdjacentHTML for customer bookings card displays -->
+    <article class="available-room-card">
       <h3>Room Type</h3>
-      <h4>Features:</h4>
-      <ul>
-        <li>Bidet</li>
-        <li>numBeds and bedSize</li>
-      </ul>
+      <h4>numBeds and bedSize</h4>
       <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
     </article>
     <article>
     </article>
   </section>
-  <section class="booking-a-room">
+  <section class="booking-a-room hidden">
     <article class="selected-room">
     <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
       <h3>Room Type</h3>
