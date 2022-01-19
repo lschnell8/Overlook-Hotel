@@ -38,7 +38,7 @@ div {
 
 h1 {
   height: fit-content;
-  margin-left: 1em;
+  margin-left: 0 1em;
 }
 
 .bookings-display {
@@ -76,6 +76,8 @@ p {
 
 .available-rooms {
   height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .available-room-card {
