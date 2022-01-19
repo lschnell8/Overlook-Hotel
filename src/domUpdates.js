@@ -1,6 +1,5 @@
-import { logInForm, date, currentDate, roomTypeSelection } from './scripts.js'
-// const usernameInput = document.getElementById('usernameInput');
-// const logInForm = document.getElementById('logIn');
+import { logInForm, date, currentDate, roomTypeInput, bookingsLog, roomListings, customer } from './scripts.js'
+//QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
@@ -18,7 +17,7 @@ let domUpdates = {
     inputType.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
   },
   
-  displayDashboard(customer, bookingsLog, roomListings, logInForm, date) {
+  displayDashboard(customer, bookingsLog, roomListings, logInForm) {
     let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
     let customerBookings = bookingsLog.getCustomerBookings(customer);
     bookingsDisplay.insertAdjacentHTML('afterbegin',
@@ -43,23 +42,33 @@ let domUpdates = {
     this.show([dashboard]);
   },
   
-  displayAvailableRooms(roomListings, bookingsLog, logInForm) {
-    roomCards.innerHTML = '';
-    
-      roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card">
+  displayAvailableRooms(logInForm, roomListings, bookingsLog, inputDate) {
+    // roomCards.innerHTML = '';
+    let roomsToDisplay = bookingsLog.getAvailableRooms(inputDate, roomListings);
+    roomsToDisplay.forEach(room => {
+      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
+    })
+    // roomCards.innerHTML +=`<article class="available-room-card">
+    // <h3>${room.roomType}</h3>
+    // <h4>${room.numBeds} ${room.bedSize}</h4>`
     
     this.hide([logInForm, dashboard]);
     this.show([availableRooms]);
   },
 
-  displayFilteredRooms() {
-    roomCards.innerHTML += `<article class="available-room-card">
-    <h3>${room.roomType}</h3>
-    <h4>${room.numBeds} ${room.bedSize}</h4>`
-    this.hide([logInForm])
-    this.show([availableRooms])
+  displayFilteredRooms(roomListings) {
+    const availableRooms = bookingsLog.getAvailableRooms(date, roomListings);
+    
+    availableRooms.forEach(room => {
+      roomCards.innerHTML += `<article class="available-room-card">
+      <h3>${room.roomType}</h3>
+      <h4>${room.numBeds} ${room.bedSize}</h4>`
+
+      this.hide([logInForm])
+      this.show([availableRooms])
+    })
   },
   
   displayBookingARoom(event, logInForm, dashboard, bookingARoom, backToDashBtn) {
