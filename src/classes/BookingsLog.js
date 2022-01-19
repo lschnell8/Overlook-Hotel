@@ -20,27 +20,18 @@ class BookingsLog {
   }
 
   getAvailableRooms(date, roomListings) {
-    const unavailableBookings = this.bookings.filter(booking => {
-      console.log('DATE', date, 'BOOKINGDATE', booking.date)
-      return date === booking.date
-    });
-    console.log('UNAVAILABLE', unavailableBookings)
-    const filteredRooms = roomListings.hotelRooms.reduce((acc, listing) => {
-      if (!unavailableBookings.length) {
-        acc.push(listing)
-      } else {
-        unavailableBookings.forEach(booking => {
-          if (booking.roomNumber !== listing.number && !acc.includes(listing)) {
-            acc.push(listing)
-          }
-        })
-      }
-        return acc
-      }, [])
-    if (unavailableBookings.length === this.bookings.length) {
+    const unavailableBookings = this.bookings.filter(booking => date === booking.date).map(booking => booking.roomNumber);
+    if (!unavailableBookings.length) {
+      return roomListings.hotelRooms
+    } else if (unavailableBookings.length === this.bookings.length) {
       return `Sorry friend! There aren't any rooms available for ${date}. Please try another date`
     } else {
-      return filteredRooms
+      return roomListings.hotelRooms.reduce((acc, listing) => {
+        if (!unavailableBookings.includes(listing.number)) {
+          acc.push(listing)
+        }
+      return acc
+      }, [])
     }
   } 
 
