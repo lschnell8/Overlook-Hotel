@@ -1,34 +1,43 @@
-import BookingsLog from './classes/BookingsLog';
-import RoomListings from './classes/RoomListings';
-import Customer from './classes/Customer';
-
+// import BookingsLog from './classes/BookingsLog';
+// import RoomListings from './classes/RoomListings';
+// import Customer from './classes/Customer';
 // const logInPage = document.getElementById('logIn');
-let bookingsLog, roomListings, customer;
+// let bookingsLog, roomListings, customer;
 
 
 // const usernameInput = document.getElementById('usernameInput');
 // const logInForm = document.getElementById('logIn');
 const dashboard = document.getElementById('dashboard');
-const bookingsDisplay = document.getElementsByClassName('bookings-display');
+const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
 const bookingARoom = document.getElementById('bookingARoom');
 
 let domUpdates = {
   //DISPLAY FUNCTIONS
 
-  displayDashboard(customer, bookingsLog) {
-    const amount = bookingsLog.calculateTotalSpent(roomListings, customer);
+  displayInputError(inputType) { 
+    console.log(inputType)
+    let message = inputType.id.split('i')[0]
+    inputType.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
+  },
+
+  displayDashboard(customer, bookingsLog, roomListings) {
+    let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
+    let customerBookings = bookingsLog.getCustomerBookings();
+
     bookingsDisplay.insertAdjacentHTML('afterbegin',
       `<h1>Hi ${customer.name}!</h1>
     <h3> My Bookings </h3>`);
+    
+    customerBookings.forEach(booking => {
+      bookingsDisplay.insertAdjacentHTML('beforeend',
+        `<article>
+        <li>Date: ${booking.date}</li>
+        <li>Room Number: ${booking.roomNumber}</li>
+        <li>Confirmation Number: ${booking.id}</li>
+      </article>`)
+    });
 
-    bookingsDisplay.insertAdjacentHTML('beforeend', 
-    `<article>
-      <li>Date: ${booking.date}</li>
-      <li>Room Number: ${booking.roomNumber}</li>
-      <li>Confirmation Number: ${booking.id}</li>
-    </article>`)
-      
     bookingsDisplay.insertAdjacentHTML('afterend',
       `<h2 class="amount-spent" id="amountSpent">You have spent ${amount} on rooms!</h2>`);
 
