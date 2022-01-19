@@ -3,7 +3,7 @@ import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
 import domUpdates from './domUpdates.js';
-import './domUpdates.js'
+// import './domUpdates.js'
 import './css/base.scss';
 
 // This is the JavaScript entry file - your code begins here
@@ -43,18 +43,39 @@ const logInForm = document.getElementById('logIn');
 
 
 //GLOBAL VARIABLES
-var bookingsLog, roomListings, customer;
+let bookingsLog, roomListings, customer;
 
 
 //EXECUTION FUNCTIONS
-const loadData = () => {
+
+// const loadPage = () => {
+//   console.log(document.activeElement)
+//   console.log(usernameInput.value)
+// };
+
+// const loadData = () => {
+  // usernameInput.onblur = () => {
+  // customerInput
+  // }
   
-};
+  // if (usernameInput.value === '') {
+    // domUpdates.displayInputError(usernameInput)
+  // // } else if (usernameInput.value.length < 9 || > 10) {
+  // }
+// };
 
 const logIn = (event) => {
   event.preventDefault();
-  let id = usernameInput.value.split('r')[1];
-  getData(id)
+  if (passwordInput.value === '' || passwordInput.value !== 'overlook2021') {
+    domUpdates.displayInputError(passwordInput);
+  } else {
+    let id = usernameInput.value.split('r')[1];
+    getData(id)
+      .then(data => {
+        console.log(customer)
+        domUpdates.displayDashboard(customer, bookingsLog, roomListings)
+      }) 
+  }
   // .then(data => instantiateClassInstances(data));
   // .then(console.log('Global bookingsLog 3', bookingsLog, 'Global customer 3', customer, 'Global roomListings 3', roomListings))
   // console.log('Global bookingsLog 3', bookingsLog)
@@ -81,7 +102,8 @@ const instantiateClassInstances = (data) => {
 
 
 //EVENT LISTENERS
-window.addEventListener('load', loadData);
+// window.addEventListener('load', loadPage);
+// usernameInput.addEventListener('blur', loadData);
 logInForm.addEventListener('submit', logIn);
 // findAvailableRoomsBtn.addEventListener('click', domUpdates.displayAvailableRooms());
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard());
