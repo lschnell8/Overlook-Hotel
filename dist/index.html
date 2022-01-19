@@ -40,22 +40,16 @@
     </form>
   </section>
   <section class="available-rooms hidden" id="availableRooms">
-      <label>See Only Options For:</label>
-      <select id="roomTypeSelection">
-        <option value="0" id="noSelection">Select A Room Type</option>
-        <option value="single room">Single Room</option>
-        <option value="suite">Suite</option>
-        <option value="junior suite">Junior Suite</option>
-        <option value="residential suite">Residential Suite</option>
-      </select>
-    <!-- insertAdjacentHTML for customer bookings card displays -->
-    <article class="available-room-card">
-      <h3>Room Type</h3>
-      <h4>numBeds and bedSize</h4>
-      <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
-    </article>
-    <article>
-    </article>
+    <label>See Only Options For:</label>
+    <select id="roomTypeSelection">
+      <option value="0" id="noSelection">Select A Room Type</option>
+      <option value="single room">Single Room</option>
+      <option value="suite">Suite</option>
+      <option value="junior suite">Junior Suite</option>
+      <option value="residential suite">Residential Suite</option>
+    </select>
+    <div class="room-cards" id="roomCards">
+    </div>
   </section>
   <section class="booking-a-room hidden" id="bookingARoom">
     <!-- <article class="selected-room"> -->

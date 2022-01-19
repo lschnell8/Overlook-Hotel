@@ -77,7 +77,13 @@ p {
 .available-rooms {
   height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.room-cards {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
 }
 
 .available-room-card {

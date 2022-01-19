@@ -4,6 +4,7 @@ import { logInForm } from './scripts.js'
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
+const roomCards = document.getElementById('roomCards')
 const bookingARoom = document.getElementById('bookingARoom');
 
 let domUpdates = {
@@ -45,13 +46,12 @@ let domUpdates = {
   },
   
   displayAvailableRooms(roomListings, bookingsLog, logInForm) {
-    // console.log('BOOKINGS', bookingsLog, 'ROOMS', roomListings)
-    availableRooms.innerHTML = '';
+    roomCards.innerHTML = '';
     let date = dateInput.value.split('-').join('/');
     console.log(date)
     let roomsToDisplay = bookingsLog.getAvailableRooms(date, roomListings);
     roomsToDisplay.forEach(room => {
-      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
+      roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
     })
