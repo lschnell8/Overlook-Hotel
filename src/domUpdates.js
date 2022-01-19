@@ -34,16 +34,21 @@ let domUpdates = {
     });
     
     bookingsDisplay.insertAdjacentHTML('afterend',
-    `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
+      `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
+    
+    let todaysDate = new Date().toJSON().slice(0, 10);
+
+    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${todaysDate}"id="dateInput" required>`)
     
     this.hide([logInForm]);
     this.show([dashboard]);
   },
   
   displayAvailableRooms(roomListings, bookingsLog, logInForm) {
-    console.log('BOOKINGS', bookingsLog, 'ROOMS', roomListings)
+    // console.log('BOOKINGS', bookingsLog, 'ROOMS', roomListings)
     availableRooms.innerHTML = '';
-    let date = dateInput.value;
+    let date = dateInput.value.split('-').join('/');
+    console.log(date)
     let roomsToDisplay = bookingsLog.getAvailableRooms(date, roomListings);
     roomsToDisplay.forEach(room => {
       availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
