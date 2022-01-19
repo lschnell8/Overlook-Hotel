@@ -1,4 +1,4 @@
-import { logInForm } from './scripts.js'
+import { logInForm, date, currentDate, roomTypeSelection } from './scripts.js'
 // const usernameInput = document.getElementById('usernameInput');
 // const logInForm = document.getElementById('logIn');
 const dashboard = document.getElementById('dashboard');
@@ -12,13 +12,13 @@ let domUpdates = {
   //DISPLAY FUNCTIONS
   
   displayInputError(inputType) { 
-    console.log(inputType.id)
+    // console.log(inputType.id)
     let type = inputType.id.toString();
     let message = type.split('i')[0]
     inputType.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
   },
   
-  displayDashboard(customer, bookingsLog, roomListings, logInForm) {
+  displayDashboard(customer, bookingsLog, roomListings, logInForm, date) {
     let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
     let customerBookings = bookingsLog.getCustomerBookings(customer);
     bookingsDisplay.insertAdjacentHTML('afterbegin',
@@ -36,10 +36,8 @@ let domUpdates = {
     
     bookingsDisplay.insertAdjacentHTML('afterend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
-    
-    let todaysDate = new Date().toJSON().slice(0, 10);
 
-    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${todaysDate}"id="dateInput" required>`)
+    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
     
     this.hide([logInForm]);
     this.show([dashboard]);
@@ -47,16 +45,21 @@ let domUpdates = {
   
   displayAvailableRooms(roomListings, bookingsLog, logInForm) {
     roomCards.innerHTML = '';
-    let date = dateInput.value.split('-').join('/');
-    console.log(date)
-    let roomsToDisplay = bookingsLog.getAvailableRooms(date, roomListings);
-    roomsToDisplay.forEach(room => {
+    
       roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
-    })
+    
     this.hide([logInForm, dashboard]);
     this.show([availableRooms]);
+  },
+
+  displayFilteredRooms() {
+    roomCards.innerHTML += `<article class="available-room-card">
+    <h3>${room.roomType}</h3>
+    <h4>${room.numBeds} ${room.bedSize}</h4>`
+    this.hide([logInForm])
+    this.show([availableRooms])
   },
   
   displayBookingARoom(event, logInForm, dashboard, bookingARoom, backToDashBtn) {
