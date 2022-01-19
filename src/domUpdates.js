@@ -44,6 +44,8 @@ let domUpdates = {
   
   displayAvailableRooms(logInForm, roomListings, bookingsLog, inputDate) {
     // roomCards.innerHTML = '';
+    let value = dateInput.value;
+    let inputDate = dateInput.value.split('-').join('/');
     let roomsToDisplay = bookingsLog.getAvailableRooms(inputDate, roomListings);
     roomsToDisplay.forEach(room => {
       availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
@@ -82,7 +84,7 @@ let domUpdates = {
           room.bidet = 'Yes'
         }
         bookingARoom.insertAdjacentHTML('afterbegin',
-        `<article class="selected-room">
+          `<article class="selected-room">
         <h3>${room.roomType}</h3>
         <h4>Features</h4>
         <ul>
@@ -96,7 +98,7 @@ let domUpdates = {
     this.hide([logInForm, dashboard]);
     this.show([bookingARoom, backToDashBtn]);
   },
-  
+
   
   //HELPER FUNCTIONS
   
