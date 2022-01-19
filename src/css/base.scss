@@ -42,6 +42,7 @@ h1 {
   height: fit-content;
   margin-left: 0 1em;
   font-weight: $bold;
+  margin: 5%;
 }
 
 .bookings-display {
@@ -62,11 +63,14 @@ h1 {
   justify-content: center;
 }
 
-button, input, select {
+button,
+input,
+select {
   width: fit-content;
   font-size: 1em;
   height: 2em;
   border-radius: 2px;
+  border: none;
 }
 
 button {
@@ -77,6 +81,10 @@ button {
 
 label {
   font-size: 1.25em;
+}
+
+input {
+  color: $black;
 }
 
 p {
@@ -90,9 +98,9 @@ p {
 }
 
 .room-cards {
-display: flex;
-flex-wrap: wrap;
-flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .available-room-card {

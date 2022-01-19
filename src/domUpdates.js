@@ -10,11 +10,11 @@ let domUpdates = {
   
   //DISPLAY FUNCTIONS
   
-  displayInputError(inputType) { 
-    // console.log(inputType.id)
-    let type = inputType.id.toString();
-    let message = type.split('i')[0]
-    inputType.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
+  displayInputError(sam) { 
+    // console.log(inputField.id)
+    // let sam = sam.id.split('I')[0]
+    // // let message = type.split('i')[0],
+    // sam.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
   },
   
   displayDashboard(customer, bookingsLog, roomListings, logInForm) {
@@ -42,11 +42,10 @@ let domUpdates = {
     this.show([dashboard]);
   },
   
-  displayAvailableRooms(logInForm, roomListings, bookingsLog, inputDate) {
+  displayAvailableRooms(logInForm, roomListings, bookingsLog) {
     // roomCards.innerHTML = '';
-    let value = dateInput.value;
-    let inputDate = dateInput.value.split('-').join('/');
-    let roomsToDisplay = bookingsLog.getAvailableRooms(inputDate, roomListings);
+    // let dateInputValue = dateInput.value.split('-').join('/');
+    let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
     roomsToDisplay.forEach(room => {
       availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
       <h3>${room.roomType}</h3>
@@ -61,9 +60,10 @@ let domUpdates = {
   },
 
   displayFilteredRooms(roomListings) {
-    const availableRooms = bookingsLog.getAvailableRooms(date, roomListings);
-    
-    availableRooms.forEach(room => {
+    // let dateInputValue = dateInput.value.split('-').join('/');
+    const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
+    console.log(availableRooms)
+    roomsByType.forEach(room => {
       roomCards.innerHTML += `<article class="available-room-card">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`

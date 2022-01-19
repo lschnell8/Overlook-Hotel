@@ -36,10 +36,12 @@ const logIn = (event) => {
 };
 
 const apendAvailableRooms = (event) => {
+  console.log(currentDate)
   event.preventDefault();
-  let inputDate = dateInput.value.split('-').join('/')
+  let dateInputValue = dateInput.value.split('-').join('/');
 
-  domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog, inputDate);
+
+  domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog, dateInputValue);
 };
 
 const getFilteredRooms = () => {
