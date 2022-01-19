@@ -3,31 +3,21 @@ import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
 import domUpdates from './domUpdates.js';
-// import { logInForm } from './domUpdates.js';
-// import './domUpdates.js'
 import './css/base.scss';
-
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
-//QUERY SELECTORS
 
 //BUTTONS AND SUBMITS
 const logInForm = document.getElementById('logIn');
+
 // const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
 // const backToDashBtn = document.getElementById('backToDashBtn');
 const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
 
 //INPUTS
+const roomTypeSelection = document.getElementById('typeInput');
 // const usernameInput = document.getElementById('usernameInput');
 // const passwordInput = document.getElementById('passwordInput');
 // const dateInput = document.getElementById('dateInput').value;
-const roomSearchForm = document.getElementById('roomSearch')
+const roomSearchForm = document.getElementById('roomSearch');
 // const roomTypeSelection = document.getElementById('roomTypeSelection');
 
 //PAGE VIEWS
@@ -46,8 +36,8 @@ const roomSearchForm = document.getElementById('roomSearch')
 
 //GLOBAL VARIABLES
 let bookingsLog, roomListings, customer;
-
-
+let currentDate = new Date().toJSON().slice(0, 10);
+let date = currentDate.split("-").join("/");
 //EXECUTION FUNCTIONS
 
 // const loadPage = () => {
@@ -74,7 +64,7 @@ const logIn = (event) => {
     let id = usernameInput.value.split('r')[1];
     getData(id)
     .then(data => {
-      domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm)
+      domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm, date)
     }) 
   }
 };
@@ -82,6 +72,18 @@ const logIn = (event) => {
 const apendAvailableRooms = (event) => {
   event.preventDefault();
   domUpdates.displayAvailableRooms(roomListings, bookingsLog, logInForm);
+};
+
+const getFilteredRooms = () => {
+  debugger;
+  let roomStyle = roomTypeSelection.value;
+  console.log(roomStyle)
+  let separateByType = bookingsLog.getAvailableRoomsByType(roomStyle, date, roomListings);
+  console.log(separateByType)
+  separateByType.forEach(room => {
+    room
+    domUpdates.displayFilteredRooms();
+  });
 };
 
 const postBooking = () => {
@@ -105,7 +107,8 @@ const instantiateClassInstances = (data) => {
 logInForm.addEventListener('submit', logIn);
 // findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 roomSearchForm.addEventListener('submit', apendAvailableRooms)
-// backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
+// roomTypeSelection.addEventListener('submit', getFilteredRooms)
+backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
 bookMyRoomBtn.addEventListener('click', postBooking)
 
-export default { logInForm }
+export default { logInForm, date, currentDate, roomTypeSelection}
