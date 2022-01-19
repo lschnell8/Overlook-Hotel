@@ -15,9 +15,9 @@ describe('BookingsLog', () => {
     bookingsLog = new BookingsLog(bookings);
     bookingsLog2 = new BookingsLog(bookings2);
     roomListings = new RoomListings(rooms);
-    customer1 = new Customer(customers[0].id, customers[0].name);
-    customer2 = new Customer(customers[1].id, customers[1].name);
-    customer3 = new Customer(customers[2].id, customers[2].name);
+    customer1 = new Customer(customers[0]);
+    customer2 = new Customer(customers[1]);
+    customer3 = new Customer(customers[2]);
   });
 
   it('Should be a function', () => {
@@ -47,21 +47,21 @@ describe('BookingsLog', () => {
   });
 
   it('Should filter available rooms by a selected date for a customer', () => {
-    expect(bookingsLog.getAvailableRooms('2022/02/05', roomListings.hotelRooms)).to.deep.equal([rooms[1], rooms[2], rooms[3]]);
+    expect(bookingsLog.getAvailableRooms('2022/02/05', roomListings)).to.deep.equal([rooms[1], rooms[2], rooms[3]]);
 
-    expect(bookingsLog.getAvailableRooms('2022/01/10', roomListings.hotelRooms)).to.deep.equal([rooms[0], rooms[1], rooms[2]]);
+    expect(bookingsLog.getAvailableRooms('2022/01/10', roomListings)).to.deep.equal([rooms[0], rooms[1], rooms[2]]);
 
-    expect(bookingsLog.getAvailableRooms('2022/01/12', roomListings.hotelRooms)).to.deep.equal([rooms[0], rooms[1], rooms[2], rooms[3]]);
+    expect(bookingsLog.getAvailableRooms('2022/01/12', roomListings)).to.deep.equal([rooms[0], rooms[1], rooms[2], rooms[3]]);
 
-    expect(bookingsLog2.getAvailableRooms('2022/01/11', roomListings.hotelRooms)).to.equal(`Sorry friend! There aren't any rooms available for 2022/01/11. Please try another date`);
+    expect(bookingsLog2.getAvailableRooms('2022/01/11', roomListings)).to.equal(`Sorry friend! There aren't any rooms available for 2022/01/11. Please try another date`);
   });
 
   it('Should filter available rooms by type', () => {
-    expect(bookingsLog.getAvailableRoomsByType('residential suite', '2022/01/12', roomListings.hotelRooms)).to.deep.equal([rooms[0], rooms[3]]);
+    expect(bookingsLog.getAvailableRoomsByType('residential suite', '2022/01/12', roomListings)).to.deep.equal([rooms[0], rooms[3]]);
     
-    expect(bookingsLog.getAvailableRoomsByType('single room', '2022/01/12', roomListings.hotelRooms)).to.deep.equal([rooms[2]]);
+    expect(bookingsLog.getAvailableRoomsByType('single room', '2022/01/12', roomListings)).to.deep.equal([rooms[2]]);
 
-    expect(bookingsLog.getAvailableRoomsByType('junior suite', '2022/01/12', roomListings.hotelRooms)).to.equal(`There are no junior suites available. Please select another room type.`);
+    expect(bookingsLog.getAvailableRoomsByType('junior suite', '2022/01/12', roomListings)).to.equal(`There are no junior suites available. Please select another room type.`);
   });
 
 });
