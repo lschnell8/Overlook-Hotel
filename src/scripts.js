@@ -3,6 +3,7 @@ import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
 import domUpdates from './domUpdates.js';
+// import { logInForm } from './domUpdates.js';
 // import './domUpdates.js'
 import './css/base.scss';
 
@@ -20,12 +21,13 @@ import './css/base.scss';
 const logInForm = document.getElementById('logIn');
 // const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
 // const backToDashBtn = document.getElementById('backToDashBtn');
-// const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
+const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
 
 //INPUTS
 // const usernameInput = document.getElementById('usernameInput');
 // const passwordInput = document.getElementById('passwordInput');
-// const dateInput = document.getElementById('dateInput');
+// const dateInput = document.getElementById('dateInput').value;
+const roomSearchForm = document.getElementById('roomSearch')
 // const roomTypeSelection = document.getElementById('roomTypeSelection');
 
 //PAGE VIEWS
@@ -66,22 +68,24 @@ let bookingsLog, roomListings, customer;
 
 const logIn = (event) => {
   event.preventDefault();
-  if (passwordInput.value === '' || passwordInput.value !== 'overlook2021') {
+  if (usernameInput.value === '' || passwordInput.value === '' || passwordInput.value !== 'overlook2021') {
     domUpdates.displayInputError(passwordInput);
   } else {
     let id = usernameInput.value.split('r')[1];
     getData(id)
-      .then(data => {
-        console.log(customer)
-        domUpdates.displayDashboard(customer, bookingsLog, roomListings)
-      }) 
+    .then(data => {
+      domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm)
+    }) 
   }
-  // .then(data => instantiateClassInstances(data));
-  // .then(console.log('Global bookingsLog 3', bookingsLog, 'Global customer 3', customer, 'Global roomListings 3', roomListings))
-  // console.log('Global bookingsLog 3', bookingsLog)
-  // console.log('Global customer 3', customer)
-  // console.log('Global roomListings 3', roomListings)
-  // domUpdates.displayDashboard(customer, bookingsLog.bookings);
+};
+
+const apendAvailableRooms = (event) => {
+  event.preventDefault();
+  domUpdates.displayAvailableRooms(roomListings, bookingsLog, logInForm);
+};
+
+const postBooking = () => {
+
 };
 
 
@@ -91,19 +95,17 @@ const getData = (id) => {
 };
 
 const instantiateClassInstances = (data) => {
-  console.log('DATA 1', data[0])
   bookingsLog = new BookingsLog(data[0].bookings);
   roomListings = new RoomListings(data[1].rooms);
   customer = new Customer(data[2]);
-  console.log('BookingsLog Instantiation 2', bookingsLog)
-  console.log('Customer Instantiation 2', customer)
-  console.log('RoomListings Instantiation 2', roomListings)
 };
 
 
 //EVENT LISTENERS
-// window.addEventListener('load', loadPage);
-// usernameInput.addEventListener('blur', loadData);
 logInForm.addEventListener('submit', logIn);
-// findAvailableRoomsBtn.addEventListener('click', domUpdates.displayAvailableRooms());
-// backToDashBtn.addEventListener('click', domUpdates.displayDashboard());
+// findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
+roomSearchForm.addEventListener('submit', apendAvailableRooms)
+// backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
+bookMyRoomBtn.addEventListener('click', postBooking)
+
+export default { logInForm }
