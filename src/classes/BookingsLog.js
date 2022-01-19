@@ -20,9 +20,12 @@ class BookingsLog {
   }
 
   getAvailableRooms(date, roomListings) {
-    //for the date passed in I will need to verify that the date is valid and is either the current date or a future date - I think I need to either parse the date for comparison or days.js for this.
-    const unavailableBookings = this.bookings.filter(booking => date === booking.date);
-    const filteredRooms = roomListings.reduce((acc, listing) => {
+    const unavailableBookings = this.bookings.filter(booking => {
+      console.log('DATE', date, 'BOOKINGDATE', booking.date)
+      return date === booking.date
+    });
+    console.log('UNAVAILABLE', unavailableBookings)
+    const filteredRooms = roomListings.hotelRooms.reduce((acc, listing) => {
       if (!unavailableBookings.length) {
         acc.push(listing)
       } else {
