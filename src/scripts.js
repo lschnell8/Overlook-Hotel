@@ -6,11 +6,11 @@ import domUpdates from './domUpdates.js';
 import './css/base.scss';
 
 //BUTTONS, INPUTS, AND SUBMITS
-const logInForm = document.getElementById('logIn');
-const roomTypeSelection = document.getElementById('typeInput');
-const roomSearchForm = document.getElementById('roomSearch');
+const logInForm = document.getElementById('logInForm');
+// const roomTypeSelection = document.getElementById('roomTypeSelection');
+// const roomSearchForm = document.getElementById('roomSearchForm');
 
-// const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
+const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
 // const backToDashBtn = document.getElementById('backToDashBtn');
 // const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
 
@@ -22,7 +22,7 @@ let date = currentDate.split("-").join("/");
 //EXECUTION FUNCTIONS
 
 const logIn = (event) => {
-  event.preventDefault();
+  event.preventDefault()
   // let userValue = usernameInput.value.split('r')[1]
   // if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
     //   domUpdates.displayLoginInputError();
@@ -39,7 +39,7 @@ const logIn = (event) => {
     
     //HELPER FUNCTIONS
     const getData = (id) => {
-      return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data));
+      return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data))
     };
     
     const instantiateClassInstances = (data) => {
@@ -53,15 +53,15 @@ const apendAvailableRooms = (event) => {
   domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog);
 };
 
-const getFilteredRooms = (event) => {
-  event.preventDefault()
+const getFilteredRooms = () => {
+  // event.preventDefault()
   let roomStyle = roomTypeInput.value;
   console.log('S-47 gFR roomStyle', roomStyle)
   let separateByType = bookingsLog.getAvailableRoomsByType(roomStyle, date, roomListings);
   console.log('S-50 gFR separateByType', separateByType)
   separateByType.forEach(room => {
-    domUpdates.displayFilteredRooms(room);
-  });
+    domUpdates.displayFilteredRooms(room)
+  })
 };
 
 // const postBooking = () => {
@@ -73,10 +73,10 @@ const getFilteredRooms = (event) => {
 
 //EVENT LISTENERS
 logInForm.addEventListener('submit', logIn);
-// findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
-roomSearchForm.addEventListener('submit', apendAvailableRooms)
-roomTypeSelection.addEventListener('submit', getFilteredRooms)
+findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
+// roomSearchForm.addEventListener('submit', apendAvailableRooms);
+// roomTypeSelection.addEventListener('submit', getFilteredRooms);
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
-// bookMyRoomBtn.addEventListener('click', postBooking)
+// bookMyRoomBtn.addEventListener('click', postBooking);
 
-export { logInForm, date, currentDate, roomTypeSelection, bookingsLog, roomListings, customer}
+export { logInForm, date, currentDate, bookingsLog, roomListings, customer}
