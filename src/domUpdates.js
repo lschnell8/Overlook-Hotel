@@ -10,11 +10,8 @@ let domUpdates = {
   
   //DISPLAY FUNCTIONS
   
-  displayInputError(sam) { 
-    // console.log(inputField.id)
-    // let sam = sam.id.split('I')[0]
-    // // let message = type.split('i')[0],
-    // sam.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
+  displayLoginInputError() { 
+    userInput.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid username and password*</p>`)
   },
   
   displayDashboard(customer, bookingsLog, roomListings, logInForm) {

@@ -20,10 +20,12 @@ let currentDate = new Date().toJSON().slice(0, 10);
 let date = currentDate.split("-").join("/");
 
 //EXECUTION FUNCTIONS
+
 const logIn = (event) => {
   event.preventDefault();
-  if (usernameInput.value === '' || passwordInput.value === '' || passwordInput.value !== 'overlook2021') {
-    domUpdates.displayInputError(passwordInput);
+  let userValue = usernameInput.value.split('r')[1]
+  if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
+    domUpdates.displayLoginInputError();
   } else {
     let id = usernameInput.value.split('r')[1];
     getData(id)
