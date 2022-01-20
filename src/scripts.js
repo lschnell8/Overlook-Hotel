@@ -7,7 +7,8 @@ import './css/base.scss';
 
 //BUTTONS, INPUTS, AND SUBMITS
 const logInForm = document.getElementById('logInForm');
-const roomTypeSelection = document.getElementById('roomTypeSelection');
+const typeInput = document.getElementById('typeInput').value.onclick();
+const roomTypeSelection = document.getElementById('roomTypeSelection')
 // const roomSearchForm = document.getElementById('roomSearchForm');
 
 const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
@@ -53,15 +54,20 @@ const apendAvailableRooms = (event) => {
   domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog);
 };
 
-const getFilteredRooms = () => {
-  // event.preventDefault()
-  let roomStyle = roomTypeSelection.value;
-  console.log('S-47 gFR roomStyle', roomStyle)
-  let separateByType = bookingsLog.getAvailableRoomsByType(roomStyle, date, roomListings);
-  console.log('S-50 gFR separateByType', separateByType)
+// const getInputValue = () => {
+//   let roomStyle = typeInput.value;
+// };
+
+const getFilteredRooms = (event) => {
+  event.preventDefault();
+  // select = document.getElementById('language');
+  console.log('S-47 gFR Select Option Value', typeInput);
+  // let typeInput = typeInput.value;
+  let separateByType = bookingsLog.getAvailableRoomsByType(typeInput, date, roomListings);
+  console.log('S-50 gFR separateByType', separateByType);
   separateByType.forEach(room => {
     domUpdates.displayFilteredRooms(room)
-  })
+  });
 };
 
 // const postBooking = () => {
