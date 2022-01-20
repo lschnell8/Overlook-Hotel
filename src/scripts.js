@@ -25,7 +25,7 @@ const logIn = (event) => {
   event.preventDefault()
   // let userValue = usernameInput.value.split('r')[1]
   // if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
-    //   domUpdates.displayLoginInputError();
+    // domUpdates.displayLoginInputError();
     // } else {
       let id = usernameInput.value.split('r')[1];
       getData(id)
@@ -37,16 +37,16 @@ const logIn = (event) => {
       // passwordInput.innerText = '';
     };
     
-    //HELPER FUNCTIONS
-    const getData = (id) => {
-      return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data))
-    };
-    
-    const instantiateClassInstances = (data) => {
-      bookingsLog = new BookingsLog(data[0].bookings);
-      roomListings = new RoomListings(data[1].rooms);
-      customer = new Customer(data[2]);
-    };
+  //HELPER FUNCTIONS
+  const getData = (id) => {
+    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data))
+  };
+  
+  const instantiateClassInstances = (data) => {
+    bookingsLog = new BookingsLog(data[0].bookings);
+    roomListings = new RoomListings(data[1].rooms);
+    customer = new Customer(data[2]);
+  };
 
 const apendAvailableRooms = (event) => {
   event.preventDefault();
@@ -79,4 +79,4 @@ findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
 // bookMyRoomBtn.addEventListener('click', postBooking);
 
-export { logInForm, date, currentDate, bookingsLog, roomListings, customer}
+export { logInForm, date, currentDate, bookingsLog, roomListings, customer }
