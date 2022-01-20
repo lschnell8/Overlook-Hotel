@@ -1,4 +1,4 @@
-import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
+import { logInForm, date, currentDate, bookingsLog, roomListings, customer } from './scripts.js'
 
 
 //QUERY SELECTORS
@@ -36,7 +36,7 @@ let domUpdates = {
     bookingsDisplay.insertAdjacentHTML('afterend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
 
-    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
+    // findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
     
     this.hide([logInForm]);
     this.show([dashboard]);
@@ -63,7 +63,7 @@ let domUpdates = {
     let dateInputValue = dateInput.value.split('-').join('/');
     console.log('dU-64 dateInputValue', dateInputValue);
     const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
-    
+
     console.log(availableRooms)
     roomsByType.forEach(room => {
       roomCards.innerHTML += `<article class="available-room-card">
