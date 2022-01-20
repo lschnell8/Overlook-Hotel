@@ -17,7 +17,7 @@
     <h1>Welcome To Overlook Hotel!</h1>
     <button class="back-to-dash-btn hidden" id="backToDashBtn">Back to My Dashboard</button>
   </header>
-  <form class="log-in" id="logIn">
+  <form class="log-in" id="logInForm">
     <h2>Please log in to continue...</h2>
       <label for="userName">Username:</label>
       <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
@@ -31,10 +31,20 @@
     </aside>
     <form class="room-search" id="roomSearch">
       <h2>Book A Room</h3>
-        <label>Check In Date:</label>
-        <!-- <input type="date" id="dateInput"> -->
+        <label>Check In Date:
+          <input class="date-input" id="dateInput" type="date">
+        </label>
         <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
     </form>
+    <!-- <form class="log-in" id="logInForm">
+      <h2>Please log in to continue...</h2>
+      <label for="userName">Username:</label>
+      <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
+      <label for="password">Password:</label>
+      <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
+      <p class="login-error hidden" id="loginError">*Please enter a valid username and password*</p>
+      <button type="submit" id="logInBtn">Log In</button>
+    </form> -->
   </section>
   <section class="available-rooms hidden" id="availableRooms">
     <form id="roomTypeSelection">
