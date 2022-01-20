@@ -7,7 +7,7 @@ import './css/base.scss';
 
 //BUTTONS, INPUTS, AND SUBMITS
 const logInForm = document.getElementById('logIn');
-const roomTypeInput = document.getElementById('typeInput');
+const roomTypeSelection = document.getElementById('typeInput');
 const roomSearchForm = document.getElementById('roomSearch');
 
 // const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
@@ -23,34 +23,42 @@ let date = currentDate.split("-").join("/");
 
 const logIn = (event) => {
   event.preventDefault();
-  let userValue = usernameInput.value.split('r')[1]
-  if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
-    domUpdates.displayLoginInputError();
-  } else {
-    let id = usernameInput.value.split('r')[1];
-    getData(id)
-    .then(data => {
-      domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm, date)
-    }) 
-  }
-  // usernameInput.innerText = '';
-  // passwordInput.innerText = '';
-};
+  // let userValue = usernameInput.value.split('r')[1]
+  // if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
+    //   domUpdates.displayLoginInputError();
+    // } else {
+      let id = usernameInput.value.split('r')[1];
+      getData(id)
+      .then(data => {
+        domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm, date)
+      }) 
+      // }
+      // usernameInput.innerText = '';
+      // passwordInput.innerText = '';
+    };
+    
+    //HELPER FUNCTIONS
+    const getData = (id) => {
+      return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data));
+    };
+    
+    const instantiateClassInstances = (data) => {
+      bookingsLog = new BookingsLog(data[0].bookings);
+      roomListings = new RoomListings(data[1].rooms);
+      customer = new Customer(data[2]);
+    };
 
 const apendAvailableRooms = (event) => {
-  console.log(currentDate)
   event.preventDefault();
-  let dateInputValue = dateInput.value.split('-').join('/');
-
-
-  domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog, dateInputValue);
+  domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog);
 };
 
-const getFilteredRooms = () => {
+const getFilteredRooms = (event) => {
+  event.preventDefault()
   let roomStyle = roomTypeInput.value;
-  // console.log(roomStyle)
+  console.log('S-47 gFR roomStyle', roomStyle)
   let separateByType = bookingsLog.getAvailableRoomsByType(roomStyle, date, roomListings);
-  console.log(separateByType)
+  console.log('S-50 gFR separateByType', separateByType)
   separateByType.forEach(room => {
     domUpdates.displayFilteredRooms(room);
   });
@@ -61,16 +69,6 @@ const getFilteredRooms = () => {
 // };
 
 
-//HELPER FUNCTIONS
-const getData = (id) => {
-  return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers', id)]).then(data => instantiateClassInstances(data));
-};
-
-const instantiateClassInstances = (data) => {
-  bookingsLog = new BookingsLog(data[0].bookings);
-  roomListings = new RoomListings(data[1].rooms);
-  customer = new Customer(data[2]);
-};
 
 
 //EVENT LISTENERS
@@ -81,4 +79,4 @@ roomTypeSelection.addEventListener('submit', getFilteredRooms)
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
 // bookMyRoomBtn.addEventListener('click', postBooking)
 
-export default { logInForm, date, currentDate, roomTypeSelection, bookingsLog, roomListings, customer}
+export { logInForm, date, currentDate, roomTypeSelection, bookingsLog, roomListings, customer}

@@ -1,17 +1,20 @@
-import { logInForm, date, currentDate, roomTypeInput, bookingsLog, roomListings, customer } from './scripts.js'
+import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
+
+
 //QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
-const roomCards = document.getElementById('roomCards')
-const bookingARoom = document.getElementById('bookingARoom');
+const roomCards = document.getElementById('roomCards');
+const loginError = document.getElementById('loginError');
+// const bookingARoom = document.getElementById('bookingARoom');
+
 
 let domUpdates = {
-  
+
   //DISPLAY FUNCTIONS
-  
   displayLoginInputError() { 
-    userInput.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid username and password*</p>`)
+    this.show([loginError])
   },
   
   displayDashboard(customer, bookingsLog, roomListings, logInForm) {
@@ -41,7 +44,7 @@ let domUpdates = {
   
   displayAvailableRooms(logInForm, roomListings, bookingsLog) {
     // roomCards.innerHTML = '';
-    // let dateInputValue = dateInput.value.split('-').join('/');
+    let dateInputValue = dateInput.value.split('-').join('/');
     let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
     roomsToDisplay.forEach(room => {
       availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
@@ -57,8 +60,10 @@ let domUpdates = {
   },
 
   displayFilteredRooms(roomListings) {
-    // let dateInputValue = dateInput.value.split('-').join('/');
+    let dateInputValue = dateInput.value.split('-').join('/');
+    console.log('dU-64 dateInputValue', dateInputValue);
     const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
+    
     console.log(availableRooms)
     roomsByType.forEach(room => {
       roomCards.innerHTML += `<article class="available-room-card">

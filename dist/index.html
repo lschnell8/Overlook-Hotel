@@ -23,11 +23,12 @@
       <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
       <label for="password">Password:</label>
       <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
+      <p class="login-error hidden" id="loginError">*Please enter a valid username and password*</p>
       <button type="submit" id="logInBtn">Log In</button>
   </form>
   <section class="dash-board hidden" id="dashboard">
-    <div class="bookings-display">
-    </div>
+    <aside class="bookings-display">
+    </aside>
     <form class="room-search" id="roomSearch">
       <h2>Book A Room</h3>
         <label>Check In Date:</label>
