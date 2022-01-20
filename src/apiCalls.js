@@ -14,7 +14,7 @@ export const fetchApiData = (type, id) => {
 };
 
 //POST
-const submitBooking = (customerBooking) => {
+export const submitBooking = (customerBooking) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     headers: {
