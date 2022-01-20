@@ -1,5 +1,7 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_reset';
+@import '_mixins';
 
 * {
   font-family: $mainFont;
@@ -13,18 +15,24 @@ body {
   background-color: $blue;
 }
 
-h2 {
-  height: fit-content;
-  margin-left: .5em;
+h1 {
   font-weight: $bold;
+  margin: 5%;
+  font-size: 2em;
+}
+
+h2 {
+  font-weight: $bold;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin: 1em;
 }
 
 .log-in {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
 }
 
 div {
@@ -38,12 +46,6 @@ div {
   justify-content: space-between;
 }
 
-h1 {
-  height: fit-content;
-  margin-left: 0 1em;
-  font-weight: $bold;
-  margin: 5%;
-}
 
 .bookings-display {
   flex: 1;
@@ -66,17 +68,28 @@ h1 {
 button,
 input,
 select {
-  width: fit-content;
   font-size: 1em;
   height: 2em;
   border-radius: 2px;
   border: none;
+  margin: 1%;
+  min-width: 10em;
 }
 
 button {
-  background-color: $blueTeal;
-  margin: 2%;
+  cursor: pointer;
+  background-color: $sunshineYellow;
+  color: $blueTeal;
   border-radius: 0.25em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+
+  &:hover {
+    background-color: $gold;
+    color: $white;
+    transform: scale(1.1);
+  }
 }
 
 label {
