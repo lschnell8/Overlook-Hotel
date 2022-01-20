@@ -64,7 +64,7 @@ let domUpdates = {
     console.log('dU-64 dateInputValue', dateInputValue);
     const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
 
-    console.log(availableRooms)
+    console.log('AVAILABLE', availableRooms)
     roomsByType.forEach(room => {
       roomCards.innerHTML += `<article class="available-room-card">
       <h3>${room.roomType}</h3>
