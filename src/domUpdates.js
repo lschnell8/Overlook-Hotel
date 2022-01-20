@@ -36,7 +36,7 @@ let domUpdates = {
     bookingsDisplay.insertAdjacentHTML('afterend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
 
-    // findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
+    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
     
     this.hide([logInForm]);
     this.show([dashboard]);

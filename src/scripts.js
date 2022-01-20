@@ -7,7 +7,7 @@ import './css/base.scss';
 
 //BUTTONS, INPUTS, AND SUBMITS
 const logInForm = document.getElementById('logInForm');
-// const roomTypeSelection = document.getElementById('roomTypeSelection');
+const roomTypeSelection = document.getElementById('roomTypeSelection');
 // const roomSearchForm = document.getElementById('roomSearchForm');
 
 const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
@@ -75,7 +75,7 @@ const getFilteredRooms = () => {
 logInForm.addEventListener('submit', logIn);
 findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 // roomSearchForm.addEventListener('submit', apendAvailableRooms);
-// roomTypeSelection.addEventListener('submit', getFilteredRooms);
+roomTypeSelection.addEventListener('submit', getFilteredRooms);
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
 // bookMyRoomBtn.addEventListener('click', postBooking);
 
