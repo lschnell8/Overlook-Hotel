@@ -35,9 +35,10 @@ h2 {
   flex-wrap: wrap;
 }
 
-div {
+.bookings-display {
   display: flex;
   flex-direction: column;
+  margin: 0 2%;
 }
 
 .dash-board {
@@ -62,7 +63,6 @@ div {
   flex-direction: column;
   flex: 1;
   align-items: center;
-  justify-content: center;
 }
 
 button,
@@ -74,6 +74,10 @@ select {
   border: none;
   margin: 1%;
   min-width: 10em;
+}
+
+label {
+  text-align: center;
 }
 
 button {
@@ -90,6 +94,10 @@ button {
     color: $white;
     transform: scale(1.1);
   }
+}
+
+.back-to-dash-btn {
+  margin: 0 5%;
 }
 
 label {

@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="icon" href="../images/favicon.png" type="image/x-icon">
   <title>Overlook Hotel</title>
 </head>
@@ -15,27 +16,32 @@
 <body>
   <header>
     <h1>Welcome To Overlook Hotel!</h1>
-    <button class="back-to-dash-btn hidden" id="backToDashBtn">Back to My Dashboard</button>
+    <button class="back-to-dash-btn" id="backToDashBtn">Back to My Dashboard</button>
   </header>
-  <form class="log-in" id="logIn">
+  <!-- **** remove hidden from login form before live **** -->
+  <form class="log-in hidden" id="logIn">
     <h2>Please log in to continue...</h2>
-      <label for="userName">Username:</label>
-      <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
-      <label for="password">Password:</label>
-      <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
-      <button type="submit" id="logInBtn">Log In</button>
+    <label for="userName">Username:</label>
+    <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
+    <label for="password">Password:</label>o
+    <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
+    <button type="submit" id="logInBtn">Log In</button>
   </form>
-  <section class="dash-board hidden" id="dashboard">
-    <div class="bookings-display">
-    </div>
+  <!-- ***** hide below section after applying login **** -->
+  <section class="dash-board" id="dashboard">
+    <aside class="bookings-display">
+      <!-- bookings display here -->
+    </aside>
     <form class="room-search" id="roomSearch">
       <h2>Book A Room</h3>
-        <label>Check In Date:</label>
-        <!-- <input type="date" id="dateInput"> -->
+        <label>Check In Date:
+          <input class="date-input" id="dateInput" type="date">
+        </label>
         <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
     </form>
   </section>
-  <section class="available-rooms hidden" id="availableRooms">
+  <!-- **** hide hidden below for page login **** -->
+  <section class="available-rooms" id="availableRooms">
     <form id="roomTypeSelection">
       <label>See Only Options For:
         <select class="input" id="typeInput" placeholder="Make A Selection" name="room options">

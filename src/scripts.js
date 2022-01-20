@@ -1,4 +1,6 @@
-import { fetchApiData } from './apiCalls';
+import {
+  fetchApiData
+} from './apiCalls';
 import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
@@ -10,6 +12,7 @@ const logInForm = document.getElementById('logIn');
 const roomTypeInput = document.getElementById('typeInput');
 const roomSearchForm = document.getElementById('roomSearch');
 
+
 // const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
 // const backToDashBtn = document.getElementById('backToDashBtn');
 // const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
@@ -18,6 +21,7 @@ const roomSearchForm = document.getElementById('roomSearch');
 let bookingsLog, roomListings, customer;
 let currentDate = new Date().toJSON().slice(0, 10);
 let date = currentDate.split("-").join("/");
+const minDate = document.getElementById('dateInput').setAttribute("min", date);
 
 //EXECUTION FUNCTIONS
 
@@ -29,9 +33,9 @@ const logIn = (event) => {
   } else {
     let id = usernameInput.value.split('r')[1];
     getData(id)
-    .then(data => {
-      domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm, date)
-    }) 
+      .then(data => {
+        domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm, date)
+      })
   }
   // usernameInput.innerText = '';
   // passwordInput.innerText = '';
@@ -41,6 +45,7 @@ const apendAvailableRooms = (event) => {
   console.log(currentDate)
   event.preventDefault();
   let dateInputValue = dateInput.value.split('-').join('/');
+
 
 
   domUpdates.displayAvailableRooms(logInForm, roomListings, bookingsLog, dateInputValue);
@@ -74,6 +79,7 @@ const instantiateClassInstances = (data) => {
 
 
 //EVENT LISTENERS
+window.addEventListener('load', logIn)
 logInForm.addEventListener('submit', logIn);
 // findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 roomSearchForm.addEventListener('submit', apendAvailableRooms)
@@ -81,4 +87,12 @@ roomTypeSelection.addEventListener('submit', getFilteredRooms)
 // backToDashBtn.addEventListener('click', domUpdates.displayDashboard(customer, bookingsLog, roomListings, logInForm));
 // bookMyRoomBtn.addEventListener('click', postBooking)
 
-export default { logInForm, date, currentDate, roomTypeSelection, bookingsLog, roomListings, customer}
+export default {
+  logInForm,
+  date,
+  currentDate,
+  roomTypeSelection,
+  bookingsLog,
+  roomListings,
+  customer
+}
