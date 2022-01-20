@@ -55,7 +55,7 @@ const apendAvailableRooms = (event) => {
 
 const getFilteredRooms = () => {
   // event.preventDefault()
-  let roomStyle = roomTypeInput.value;
+  let roomStyle = roomTypeSelection.value;
   console.log('S-47 gFR roomStyle', roomStyle)
   let separateByType = bookingsLog.getAvailableRoomsByType(roomStyle, date, roomListings);
   console.log('S-50 gFR separateByType', separateByType)
