@@ -32,25 +32,15 @@
     <form class="room-search" id="roomSearch">
       <h2>Book A Room</h3>
         <label>Check In Date:
-          <!-- <input class="date-input" id="dateInput" type="date"> -->
         </label>
         <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
     </form>
-    <!-- <form class="log-in" id="logInForm">
-      <h2>Please log in to continue...</h2>
-      <label for="userName">Username:</label>
-      <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
-      <label for="password">Password:</label>
-      <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
-      <p class="login-error hidden" id="loginError">*Please enter a valid username and password*</p>
-      <button type="submit" id="logInBtn">Log In</button>
-    </form> -->
   </section>
   <section class="available-rooms hidden" id="availableRooms">
     <form id="roomTypeSelection">
       <label>See Only Options For:
         <select class="input" id="typeInput" placeholder="Make A Selection" name="room options">
-          <!-- <option value="0" id="noSelection"></option> -->
+          <!-- <option value="0"></option> -->
           <option value="single room">Single Room</option>
           <option value="suite">Suite</option>
           <option value="junior suite">Junior Suite</option>
@@ -64,20 +54,8 @@
   </section>
   </section>
   <section class="booking-a-room hidden" id="bookingARoom">
-    <!-- <article class="selected-room"> -->
-    <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
-    <!-- <h3>Room Type</h3>
-      <h4>Features</h4>
-      <ul>
-        <li>Bidet</li>
-        <li>numBeds and bedSize</li>
-      </ul>
-      <h5>costPerNight</h5>
-    </article> -->
     <button id="bookMyRoomBtn">Book My Room</button>
   </section>
-
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
 </body>
