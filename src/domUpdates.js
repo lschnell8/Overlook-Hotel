@@ -1,5 +1,4 @@
-import { logInForm, date, currentDate, bookingsLog, roomListings, customer } from './scripts.js'
-
+import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
 
 //QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
@@ -7,8 +6,7 @@ const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
 const roomCards = document.getElementById('roomCards');
 const loginError = document.getElementById('loginError');
-// const bookingARoom = document.getElementById('bookingARoom');
-
+const bookingARoom = document.getElementById('bookingARoom');
 
 let domUpdates = {
 
@@ -17,7 +15,7 @@ let domUpdates = {
     this.show([loginError])
   },
   
-  displayDashboard(customer, bookingsLog, roomListings, logInForm) {
+  displayDashboard(customer, bookingsLog, roomListings) {
     let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
     let customerBookings = bookingsLog.getCustomerBookings(customer);
     bookingsDisplay.insertAdjacentHTML('afterbegin',
@@ -37,56 +35,39 @@ let domUpdates = {
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
 
     findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
-    
-    this.hide([logInForm]);
-    this.show([dashboard]);
   },
   
-  displayAvailableRooms(logInForm, roomListings, bookingsLog) {
+  displayAvailableRooms(roomListings, bookingsLog) {
     // roomCards.innerHTML = '';
     let dateInputValue = dateInput.value.split('-').join('/');
     let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
-    roomsToDisplay.forEach(room => {
-      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
+    let roomsToSelect = roomsToDisplay.map(room => {
+      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
     })
-    // roomCards.innerHTML +=`<article class="available-room-card">
-    // <h3>${room.roomType}</h3>
-    // <h4>${room.numBeds} ${room.bedSize}</h4>`
-    
-    this.hide([logInForm, dashboard]);
-    this.show([availableRooms]);
+    return roomsToSelect
   },
 
-  displayFilteredRooms(roomListings) {
+  displayFilteredRooms(roomListings, type) {
     let dateInputValue = dateInput.value.split('-').join('/');
     console.log('dU-64 dateInputValue', dateInputValue);
     const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
 
-    console.log('AVAILABLE', availableRooms)
     roomsByType.forEach(room => {
-      roomCards.innerHTML += `<article class="available-room-card">
+      roomCards.innerHTML +=
+      `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`
-
-      this.hide([logInForm])
-      this.show([availableRooms])
     })
   },
   
-  displayBookingARoom(event, logInForm, dashboard, bookingARoom, backToDashBtn) {
-    roomListings.find(room => {
-      if (event.target.closest(room.id)) {
-        // [!room.bidet] = 'No'
-        // [room.bidet] = 'Yes'
-        if (!room.bidet) {
-          room.bidet = 'No'
-        } else {
-          room.bidet = 'Yes'
-        }
+  displayBookingARoom(event, bookingARoom) {
+    let customerRoomChoices = this.displayAvailableRooms(logInForm, roomListings, bookingsLog)
+    customerRoomChoices.find(room => {
+      if (event.target.id === room.number) {
         bookingARoom.insertAdjacentHTML('afterbegin',
-          `<article class="selected-room">
+          `<article class="selected-room" id="${room.number}">
         <h3>${room.roomType}</h3>
         <h4>Features</h4>
         <ul>
@@ -96,13 +77,31 @@ let domUpdates = {
         <h5>Cost Per Night: ${room.costPerNight}</h5>
         </article>`)
       }
+      return room
     })
-    this.hide([logInForm, dashboard]);
-    this.show([bookingARoom, backToDashBtn]);
+    
   },
 
-  
   //HELPER FUNCTIONS
+  showDashboard() {
+    this.hide([logInForm]);
+    this.show([dashboard]);
+  },
+
+  showAvailableRooms() {
+    this.hide([logInForm, dashboard]);
+    this.show([availableRooms]);
+  },
+
+  showFilteredRooms() {
+    this.hide([logInForm])
+    this.show([availableRooms])
+  },
+
+  showRoomToBook() {
+    this.hide([logInForm, dashboard]);
+    this.show([bookingARoom, backToDashBtn]);
+  }, 
   
   show(elements) {
       elements.forEach(element => element.classList.remove('hidden'));
