@@ -27,32 +27,42 @@ const logIn = (event) => {
   // } else {
   let id = usernameInput.value.split('r')[1];
     getData(id)
-    .then(data => {
+      .then(data => {
       renderDashboard();
     }) 
-  // }    
+    // }    
 };
-    
-const getFilteredRooms = (event) => {
-  event.preventDefault();
-  let dropDownSelection = getInputValue();
-  console.log('S-47 gFR Select Option Value', typeInput.value, 'variable', dropDownSelection);
-  let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, date, roomListings);
-  console.log('S-50 gFR separateByType', separateByType);
-  separateByType.forEach(room => {
-    domUpdates.displayFilteredRooms(room);
-  });
-  domUpdates.showFilteredRooms();
-};
-
-const submitBooking = () => {
-  postBooking();
-};
-
 const renderDashboard = () => {
   domUpdates.displayDashboard(customer, bookingsLog, roomListings, date)
   domUpdates.showDashboard();
 };
+  
+const apendAvailableRooms = (event) => {
+  event.preventDefault();
+  domUpdates.displayAvailableRooms(roomListings, bookingsLog);
+  domUpdates.showAvailableRooms();
+};
+
+const getFilteredRooms = (event) => {
+  event.preventDefault();
+  let dropDownSelection = getInputValue();
+  console.log('S-47 gFR Select Option Value', typeInput.value, 'variable', dropDownSelection);
+  if (!dropDownSelection) {
+    //display error msg
+  }
+  let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, date, roomListings);
+  console.log('S-50 gFR separateByType', separateByType);
+  domUpdates.showFilteredRooms();
+  separateByType.forEach(room => {
+    domUpdates.displayFilteredRooms(room);
+  });
+};
+
+const submitBooking = () => {
+  postBooking();
+  domUpdates.hide([bookMyRoomBtn])
+};
+
 
 //HELPER FUNCTIONS
 const getData = (id) => {
@@ -65,11 +75,6 @@ const instantiateClassInstances = (data) => {
   customer = new Customer(data[2]);
 };
 
-const apendAvailableRooms = (event) => {
-  event.preventDefault();
-  domUpdates.displayAvailableRooms(roomListings, bookingsLog);
-  domUpdates.showAvailableRooms();
-};
 
 const getInputValue = () => {
   const typeInput = document.getElementById('typeInput');
