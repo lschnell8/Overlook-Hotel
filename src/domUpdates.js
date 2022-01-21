@@ -4,7 +4,7 @@ import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
-const roomCards = document.getElementById('roomCards');
+// const roomCards = document.getElementById('roomCards');
 const loginError = document.getElementById('loginError');
 const bookingARoom = document.getElementById('bookingARoom');
 
@@ -13,6 +13,10 @@ let domUpdates = {
   //DISPLAY FUNCTIONS
   displayLoginInputError() { 
     this.show([loginError])
+  },
+
+  displayFilterRoomsError() {
+    
   },
   
   displayDashboard(customer, bookingsLog, roomListings) {
@@ -31,10 +35,11 @@ let domUpdates = {
       </article>`)
     });
     
-    bookingsDisplay.insertAdjacentHTML('afterend',
+    bookingsDisplay.insertAdjacentHTML('beforeend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
 
-    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
+    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', 
+    `<input type="date" min="${currentDate}"id="dateInput" required>`)
   },
   
   displayAvailableRooms(roomListings, bookingsLog) {
@@ -49,17 +54,18 @@ let domUpdates = {
     return roomsToSelect
   },
 
-  displayFilteredRooms(roomListings, type) {
-    let dateInputValue = dateInput.value.split('-').join('/');
-    console.log('dU-64 dateInputValue', dateInputValue);
-    const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
+  displayFilteredRooms(room) {
+    // let dateInputValue = dateInput.value.split('-').join('/');
+    // console.log('dU-64 dateInputValue', dateInputValue);
+    // const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
 
-    roomsByType.forEach(room => {
-      roomCards.innerHTML +=
-      `<article class="available-room-card" id="${room.number}">
+    // roomsByType.forEach(room => {
+    availableRooms.insertAdjacentHTML('beforeend',
+    `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
-      <h4>${room.numBeds} ${room.bedSize}</h4>`
-    })
+      <h4>${room.numBeds} ${room.bedSize}</h4>`)
+      
+    // })
   },
   
   displayBookingARoom(event, bookingARoom) {
@@ -84,23 +90,24 @@ let domUpdates = {
 
   //HELPER FUNCTIONS
   showDashboard() {
-    this.hide([logInForm]);
+    this.hide([logInForm, backToDashBtn, availableRooms]);
     this.show([dashboard]);
   },
 
   showAvailableRooms() {
-    this.hide([logInForm, dashboard]);
+    bookingsDisplay.innerHTML = '';
+    this.hide([logInForm, dashboard, backToDashBtn]);
     this.show([availableRooms]);
   },
 
   showFilteredRooms() {
-    this.hide([logInForm])
-    this.show([availableRooms])
+    availableRooms.innerHTML = '';
+    this.show([backToDashBtn])
   },
 
   showRoomToBook() {
     this.hide([logInForm, dashboard]);
-    this.show([bookingARoom, backToDashBtn]);
+    this.show([bookingARoom]);
   }, 
   
   show(elements) {
