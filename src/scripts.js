@@ -1,4 +1,4 @@
-import { fetchApiData, submitBooking } from './apiCalls';
+import { fetchApiData, postBooking } from './apiCalls';
 import BookingsLog from './classes/BookingsLog';
 import RoomListings from './classes/RoomListings';
 import Customer from './classes/Customer';
@@ -21,16 +21,16 @@ let date = currentDate.split("-").join("/");
 //EXECUTION FUNCTIONS
 const logIn = (event) => {
   event.preventDefault()
-  let userValue = usernameInput.value.split('r')[1]
-  if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
-    domUpdates.displayLoginInputError();
-  } else {
+  // let userValue = usernameInput.value.split('r')[1]
+  // if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
+  //   domUpdates.displayLoginInputError();
+  // } else {
   let id = usernameInput.value.split('r')[1];
     getData(id)
     .then(data => {
       renderDashboard();
     }) 
-  }    
+  // }    
 };
     
 const getFilteredRooms = (event) => {
@@ -45,8 +45,8 @@ const getFilteredRooms = (event) => {
   domUpdates.showFilteredRooms();
 };
 
-const postBooking = () => {
-  
+const submitBooking = () => {
+  postBooking();
 };
 
 const renderDashboard = () => {
@@ -81,7 +81,7 @@ const getInputValue = () => {
 //EVENT LISTENERS
 logInForm.addEventListener('submit', logIn);
 findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
-bookMyRoomBtn.addEventListener('click', postBooking);
+bookMyRoomBtn.addEventListener('click', submitBooking);
 backToDashBtn.addEventListener('click', renderDashboard);
 roomTypeSelection.addEventListener('submit', getInputValue)
 filterByTypeBtn.addEventListener('click', getFilteredRooms);
