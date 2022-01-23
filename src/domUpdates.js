@@ -4,9 +4,11 @@ import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
-// const roomCards = document.getElementById('roomCards');
+const roomCards = document.getElementById('roomCards');
 const loginError = document.getElementById('loginError');
 const bookingARoom = document.getElementById('bookingARoom');
+const roomSearchForm = document.getElementById('roomSearch');
+// const dateInput = document.getElementById('dateInput');
 
 let domUpdates = {
 
@@ -38,8 +40,10 @@ let domUpdates = {
     bookingsDisplay.insertAdjacentHTML('beforeend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
 
-    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', 
-    `<input type="date" min="${currentDate}"id="dateInput" required>`)
+    roomSearchForm.insertAdjacentHTML('afterbegin', 
+      `<h2>Book A Room</h3>
+      <label>Check In Date:</label>
+      <input type="date" min="${currentDate}"id="dateInput" required>`)
   },
   
   displayAvailableRooms(roomListings, bookingsLog) {
@@ -47,7 +51,7 @@ let domUpdates = {
     let dateInputValue = dateInput.value.split('-').join('/');
     let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
     let roomsToSelect = roomsToDisplay.map(room => {
-      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
+      roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
     })
@@ -60,7 +64,7 @@ let domUpdates = {
     // const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
 
     // roomsByType.forEach(room => {
-    availableRooms.insertAdjacentHTML('beforeend',
+    roomCards.insertAdjacentHTML('beforeend',
     `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`)
@@ -93,15 +97,18 @@ let domUpdates = {
     this.hide([logInForm, backToDashBtn, availableRooms]);
     this.show([dashboard]);
   },
-
+  
   showAvailableRooms() {
+    roomSearchForm.innerHTML = '';
     bookingsDisplay.innerHTML = '';
+    typeInput.selectedIndex = 0;
     this.hide([logInForm, dashboard, backToDashBtn]);
-    this.show([availableRooms]);
+    this.show([availableRooms, roomTypeSelection]);
   },
 
   showFilteredRooms() {
-    availableRooms.innerHTML = '';
+    roomCards.innerHTML = '';
+    this.hide([roomTypeSelection])
     this.show([backToDashBtn])
   },
 
@@ -112,7 +119,7 @@ let domUpdates = {
   
   show(elements) {
       elements.forEach(element => element.classList.remove('hidden'));
-    },
+  },
   
   hide(elements) {
     elements.forEach(element => element.classList.add('hidden'));
