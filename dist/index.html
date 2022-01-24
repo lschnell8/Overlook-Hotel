@@ -35,11 +35,12 @@
         </label> -->
       </form>
       <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
+      <p class="search-date hidden" id="searchDate">Please select a check-in date</p>
   </section>
   <section class="available-rooms hidden" id="availableRooms">
     <form id="roomTypeSelection">
       <label>See Only Options For:
-        <select class="input" id="typeInput" placeholder="Make A Selection" name="room options">
+        <select class="input" id="typeInput" name="room options">
           <option value="false">Select an Option</option>
           <option value="single room">Single Room</option>
           <option value="suite">Suite</option>
@@ -48,7 +49,9 @@
         </select>
       </label>
       <button type="submit" id="filterByType">Filter By Type</button>
+      <p class="filter-error hidden" id="filterError">You must select a type if you want to filter</p>
     </form>
+    <h2 id="noMatches"></h2>
     <div class="room-cards" id="roomCards">
     </div>
   </section>
