@@ -6,12 +6,12 @@ import domUpdates from './domUpdates.js';
 import './css/base.scss';
 
 //BUTTONS, INPUTS, AND SUBMITS
-const logInForm = document.getElementById('logInForm');
-const roomTypeSelection = document.getElementById('roomTypeSelection');
+// const logInForm = document.getElementById('logInForm');
+// const roomTypeSelection = document.getElementById('roomTypeSelection');
 const filterByTypeBtn = document.getElementById('filterByType');
-const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
-const backToDashBtn = document.getElementById('backToDashBtn');
-const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
+// const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
+// const backToDashBtn = document.getElementById('backToDashBtn');
+// const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
 
 //GLOBAL VARIABLES
 let bookingsLog, roomListings, customer;
@@ -28,33 +28,42 @@ const logIn = (event) => {
   let id = usernameInput.value.split('r')[1];
     getData(id)
       .then(data => {
-      renderDashboard();
+        domUpdates.displayDashboard(customer, bookingsLog, roomListings, date);
+        domUpdates.displayDateSelection();
+        domUpdates.showDashboard();
     }) 
     // }    
-};
+};   
 const renderDashboard = () => {
-  domUpdates.displayDashboard(customer, bookingsLog, roomListings, date)
+  dateInput.value = '';
   domUpdates.showDashboard();
+  domUpdates.displayDashboard(customer, bookingsLog, roomListings, date);
 };
   
 const apendAvailableRooms = (event) => {
+  roomCards.innerHTML = '';
   event.preventDefault();
-  domUpdates.displayAvailableRooms(roomListings, bookingsLog);
+  let dateInputValue = dateInput.value.split('-').join('/');
+  let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
+  roomsToDisplay.forEach(room => {
+    domUpdates.displayRooms(room);
+  })
   domUpdates.showAvailableRooms();
 };
 
 const getFilteredRooms = (event) => {
   event.preventDefault();
-  let dropDownSelection = getInputValue();
-  console.log('S-47 gFR Select Option Value', typeInput.value, 'variable', dropDownSelection);
-  if (!dropDownSelection) {
+  let dropDownSelection = getTypeInputValue();
+  let dateInputValue = dateInput.value.split('-').join('/');
+  console.log('Filtered', dateInputValue)
+  // if (!dropDownSelection) {
     //display error msg
-  }
-  let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, date, roomListings);
+    // }
+  let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, dateInputValue, roomListings);
+    domUpdates.showFilteredRooms();
   console.log('S-50 gFR separateByType', separateByType);
-  domUpdates.showFilteredRooms();
   separateByType.forEach(room => {
-    domUpdates.displayFilteredRooms(room);
+    domUpdates.displayRooms(room);
   });
 };
 
@@ -75,8 +84,7 @@ const instantiateClassInstances = (data) => {
   customer = new Customer(data[2]);
 };
 
-
-const getInputValue = () => {
+const getTypeInputValue = () => {
   const typeInput = document.getElementById('typeInput');
   let selection = typeInput.options[typeInput.selectedIndex].value;
     return selection
@@ -88,7 +96,7 @@ logInForm.addEventListener('submit', logIn);
 findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 bookMyRoomBtn.addEventListener('click', submitBooking);
 backToDashBtn.addEventListener('click', renderDashboard);
-roomTypeSelection.addEventListener('submit', getInputValue)
+roomTypeSelection.addEventListener('submit', getTypeInputValue)
 filterByTypeBtn.addEventListener('click', getFilteredRooms);
 
-export { logInForm, date, currentDate, bookingsLog, roomListings, customer }
+export { date, currentDate, bookingsLog, roomListings, customer }
