@@ -61,7 +61,7 @@ describe('BookingsLog', () => {
     
     expect(bookingsLog.getAvailableRoomsByType('single room', '2022/01/12', roomListings)).to.deep.equal([rooms[2]]);
 
-    expect(bookingsLog.getAvailableRoomsByType('junior suite', '2022/01/12', roomListings)).to.equal(`There are no junior suites available. Please select another room type.`);
+    expect(bookingsLog.getAvailableRoomsByType('junior suite', '2022/01/12', roomListings)).to.equal(`Sorry! There are no junior suites available.`);
   });
 
 });
