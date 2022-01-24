@@ -46,7 +46,8 @@ const apendAvailableRooms = (event) => {
   }
   roomCards.innerHTML = '';
   event.preventDefault();
-  let dateInputValue = dateInput.value.split('-').join('/');
+  // let dateInputValue = dateInput.value.split('-').join('/');
+  let dateInputValue = getDateInputValue();
   let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
   roomsToDisplay.forEach(room => {
     domUpdates.displayRooms(room);
@@ -60,7 +61,8 @@ const getFilteredRooms = (event) => {
   if (dropDownSelection === 'false') {
     return domUpdates.displayError(filterError)
   }
-  let dateInputValue = dateInput.value.split('-').join('/');
+  // let dateInputValue = dateInput.value.split('-').join('/');
+  let dateInputValue = getDateInputValue();
   let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, dateInputValue, roomListings);
   domUpdates.showFilteredRooms();
   if (typeof separateByType === 'string') {
@@ -72,19 +74,25 @@ const getFilteredRooms = (event) => {
 };
 
 const selectRoomToBook = (event) => {
-  const selectedRoom = roomListings.hotelRooms.find(room => {
-    if (room.number.toString() === event.target.id) {
-      return room
-    }
-  });
-  console.log(selectedRoom)
+  let selectedRoom = findRoom(event);
   domUpdates.displayBookingARoom(selectedRoom);
   domUpdates.showRoomToBook();
 }
 
-const submitBooking = () => {
-  postBooking();
-  domUpdates.hide([bookMyRoomBtn])
+const submitBooking = (room) => {
+  let dateInputValue = getDateInputValue();
+  let selectedRoom = room;
+  // console.log('ID', bookingARoom.article[article.id])
+  // console.log('VALUE',  selected-room.id)
+  console.log(selectedRoom)
+  let customerBooking = {
+    userID: customer.id,
+    date: dateInputValue,
+    roomNumber: selectedRoom
+  }
+  console.log(customerBooking)
+  // postBooking(customerBooking);
+  // domUpdates.hide([bookMyRoomBtn])
 };
 
 
@@ -103,6 +111,18 @@ const getTypeInputValue = () => {
   const typeInput = document.getElementById('typeInput');
   let selection = typeInput.options[typeInput.selectedIndex].value;
     return selection
+};
+
+const getDateInputValue = () => {
+  return dateInput.value.split('-').join('/');
+};
+
+const findRoom = (event) => {
+  return roomListings.hotelRooms.find(room => {
+    if (room.number.toString() === event.target.id) {
+      return room
+    }
+  });
 };
 
 
