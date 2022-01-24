@@ -23,7 +23,7 @@ const logIn = (event) => {
   event.preventDefault()
   // let userValue = usernameInput.value.split('r')[1]
   // if (userValue > 50 || 0 > userValue || passwordInput.value !== 'overlook2021') {
-  //   domUpdates.displayLoginInputError();
+  //   domUpdates.displayError(loginError);
   // } else {
   let id = usernameInput.value.split('r')[1];
     getData(id)
@@ -41,6 +41,9 @@ const renderDashboard = () => {
 };
   
 const apendAvailableRooms = (event) => {
+  if (!dateInput.value) {
+    return domUpdates.show([searchDate])
+  }
   roomCards.innerHTML = '';
   event.preventDefault();
   let dateInputValue = dateInput.value.split('-').join('/');
@@ -55,13 +58,8 @@ const getFilteredRooms = (event) => {
   event.preventDefault();
   let dropDownSelection = getTypeInputValue();
   let dateInputValue = dateInput.value.split('-').join('/');
-  console.log('Filtered', dateInputValue)
-  // if (!dropDownSelection) {
-    //display error msg
-    // }
   let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, dateInputValue, roomListings);
-    domUpdates.showFilteredRooms();
-  console.log('S-50 gFR separateByType', separateByType);
+  domUpdates.showFilteredRooms()
   separateByType.forEach(room => {
     domUpdates.displayRooms(room);
   });
@@ -99,4 +97,4 @@ backToDashBtn.addEventListener('click', renderDashboard);
 roomTypeSelection.addEventListener('submit', getTypeInputValue)
 filterByTypeBtn.addEventListener('click', getFilteredRooms);
 
-export { date, currentDate, bookingsLog, roomListings, customer }
+  export { date, currentDate, bookingsLog, roomListings, customer };
