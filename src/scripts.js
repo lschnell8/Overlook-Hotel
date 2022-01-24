@@ -28,16 +28,22 @@ const logIn = (event) => {
   let id = usernameInput.value.split('r')[1];
     getData(id)
       .then(data => {
-        domUpdates.displayDashboard(customer, bookingsLog, roomListings, date);
-        domUpdates.displayDateSelection();
-        domUpdates.showDashboard();
+        getDashboardInfo();
+        domUpdates.displayDateSelection(date);
     }) 
     // }    
 };   
+
+const getDashboardInfo = () => {
+  let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
+  let customerBookings = bookingsLog.getCustomerBookings(customer);
+  domUpdates.showDashboard();
+  domUpdates.displayDashboard(customer, amount, customerBookings);
+};
+
 const renderDashboard = () => {
   dateInput.value = '';
-  domUpdates.showDashboard();
-  domUpdates.displayDashboard(customer, bookingsLog, roomListings, date);
+  getDashboardInfo();
 };
   
 const apendAvailableRooms = (event) => {

@@ -1,11 +1,11 @@
-import { currentDate, bookingsLog, roomListings } from './scripts.js'
+import { currentDate } from './scripts.js'
 
 //QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
 const roomCards = document.getElementById('roomCards');
-const loginError = document.getElementById('loginError');
+// const loginError = document.getElementById('loginError');
 const bookingARoom = document.getElementById('bookingARoom');
 const roomSearchForm = document.getElementById('roomSearch');
 
@@ -25,9 +25,7 @@ let domUpdates = {
     this.show([errorType])
   },
   
-  displayDashboard(customer, bookingsLog, roomListings) {
-    let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
-    let customerBookings = bookingsLog.getCustomerBookings(customer);
+  displayDashboard(customer, amount, customerBookings) {
     bookingsDisplay.insertAdjacentHTML('afterbegin',
     `<h1>Hi ${customer.name.split(' ')[0]}!</h1>
     <h3> My Bookings </h3>`);
