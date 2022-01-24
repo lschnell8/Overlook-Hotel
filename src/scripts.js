@@ -57,9 +57,15 @@ const apendAvailableRooms = (event) => {
 const getFilteredRooms = (event) => {
   event.preventDefault();
   let dropDownSelection = getTypeInputValue();
+  if (dropDownSelection === 'false') {
+    return domUpdates.displayError(filterError)
+  }
   let dateInputValue = dateInput.value.split('-').join('/');
   let separateByType = bookingsLog.getAvailableRoomsByType(dropDownSelection, dateInputValue, roomListings);
-  domUpdates.showFilteredRooms()
+  domUpdates.showFilteredRooms();
+  if (typeof separateByType === 'string') {
+      domUpdates.displayMessage(separateByType);
+    }
   separateByType.forEach(room => {
     domUpdates.displayRooms(room);
   });
