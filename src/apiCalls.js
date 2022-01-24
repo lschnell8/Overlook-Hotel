@@ -22,5 +22,12 @@ export const postBooking = (customerBooking) => {
     },
     body: JSON.stringify(customerBooking)
   })
-    .then(response => response.json())
+    .then(response => postError(response))
 };
+
+const postError = (response) => {
+  if (!response.ok) {
+    throw "Booking failed, please try again."
+  }
+  return response.json()
+}
