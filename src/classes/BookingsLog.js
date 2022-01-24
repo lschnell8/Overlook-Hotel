@@ -20,10 +20,8 @@ class BookingsLog {
   }
 
   getAvailableRooms(date, roomListings) {
-    const unavailableBookings = this.bookings.filter(booking => date === booking.date).map(booking => booking.roomNumber);
-    if (!unavailableBookings.length) {
-      return roomListings.hotelRooms
-    } else if (unavailableBookings.length === this.bookings.length) {
+    const unavailableBookings = this.bookings.filter(booking => date === booking.date).map(booking => booking.roomNumber); 
+    if (unavailableBookings.length === this.bookings.length) {
       return `Sorry friend! There aren't any rooms available for ${date}. Please try another date`
     } else {
       return roomListings.hotelRooms.reduce((acc, listing) => {
