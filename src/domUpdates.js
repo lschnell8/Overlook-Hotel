@@ -21,12 +21,8 @@ const backToDashBtn = document.getElementById('backToDashBtn');
 let domUpdates = {
 
   //DISPLAY FUNCTIONS
-  displayLoginInputError() { 
-    this.show([loginError])
-  },
-
-  displayFilterRoomsError() {
-    
+  displayError(errorType) { 
+    this.show([errorType])
   },
   
   displayDashboard(customer, bookingsLog, roomListings) {
@@ -60,6 +56,10 @@ let domUpdates = {
     roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
       <h4>${room.numBeds} ${room.bedSize}</h4>`);
+  },
+
+  displayMessage(statement) {
+    noMatches.innerText = statement;
   },
   
   displayBookingARoom(event, bookingARoom) {
