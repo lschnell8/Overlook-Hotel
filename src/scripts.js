@@ -71,6 +71,17 @@ const getFilteredRooms = (event) => {
   });
 };
 
+const selectRoomToBook = (event) => {
+  const selectedRoom = roomListings.hotelRooms.find(room => {
+    if (room.number.toString() === event.target.id) {
+      return room
+    }
+  });
+  console.log(selectedRoom)
+  domUpdates.displayBookingARoom(selectedRoom);
+  domUpdates.showRoomToBook();
+}
+
 const submitBooking = () => {
   postBooking();
   domUpdates.hide([bookMyRoomBtn])
@@ -100,7 +111,8 @@ logInForm.addEventListener('submit', logIn);
 findAvailableRoomsBtn.addEventListener('click', apendAvailableRooms);
 bookMyRoomBtn.addEventListener('click', submitBooking);
 backToDashBtn.addEventListener('click', renderDashboard);
-roomTypeSelection.addEventListener('submit', getTypeInputValue)
+roomTypeSelection.addEventListener('submit', getTypeInputValue);
 filterByTypeBtn.addEventListener('click', getFilteredRooms);
+roomCards.addEventListener('click', selectRoomToBook);
 
   export { date, currentDate, bookingsLog, roomListings, customer };

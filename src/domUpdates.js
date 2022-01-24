@@ -62,23 +62,23 @@ let domUpdates = {
     noMatches.innerText = statement;
   },
   
-  displayBookingARoom(event, bookingARoom) {
-    let customerRoomChoices = this.displayAvailableRooms(logInForm, roomListings, bookingsLog)
-    customerRoomChoices.find(room => {
-      if (event.target.id === room.number) {
+  displayBookingARoom(room) {
+    // let customerRoomChoices = this.displayAvailableRooms(logInForm, roomListings, bookingsLog)
+    // roomListings.hotelRooms.find(room => {
+    //   if (event.target.id === room.number) {
         bookingARoom.insertAdjacentHTML('afterbegin',
           `<article class="selected-room" id="${room.number}">
-        <h3>${room.roomType}</h3>
-        <h4>Features</h4>
-        <ul>
-        <li>Bidet: ${room.bidet} </li>
-        <li>${room.numBeds} ${room.bedSize}</li>
-        </ul>
-        <h5>Cost Per Night: ${room.costPerNight}</h5>
-        </article>`)
-      }
-      return room
-    })
+          <h3>${room.roomType}</h3>
+          <h4>Features</h4>
+          <ul>
+          <li>Bidet: ${room.bidet} </li>
+          <li>${room.numBeds} ${room.bedSize}</li>
+          </ul>
+          <h5>Cost Per Night: ${room.costPerNight}</h5>
+          </article>`)
+      
+      // return room
+    // })
     
   },
 
@@ -103,7 +103,7 @@ let domUpdates = {
   },
 
   showRoomToBook() {
-    this.hide([logInForm, dashboard]);
+    this.hide([logInForm, dashboard, availableRooms]);
     this.show([bookingARoom]);
   }, 
   
