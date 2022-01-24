@@ -37,7 +37,7 @@ class BookingsLog {
     const availableRooms = this.getAvailableRooms(date, roomListings);
     const roomsByType = availableRooms.filter(room => room.roomType === type)
     if (!roomsByType.length) {
-      return `There are no ${type}s available. Please select another room type.`
+      return `Sorry! There are no ${type}s available.`
     } else {
       return roomsByType
     }
