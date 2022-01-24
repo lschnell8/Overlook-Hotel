@@ -1,4 +1,4 @@
-import { logInForm, currentDate, bookingsLog, roomListings } from './scripts.js'
+import { currentDate, bookingsLog, roomListings } from './scripts.js'
 
 //QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
@@ -8,7 +8,15 @@ const roomCards = document.getElementById('roomCards');
 const loginError = document.getElementById('loginError');
 const bookingARoom = document.getElementById('bookingARoom');
 const roomSearchForm = document.getElementById('roomSearch');
-// const dateInput = document.getElementById('dateInput');
+
+const logInForm = document.getElementById('logInForm');
+const roomTypeSelection = document.getElementById('roomTypeSelection');
+// const filterByTypeBtn = document.getElementById('filterByType');
+// const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
+const backToDashBtn = document.getElementById('backToDashBtn');
+// const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
+
+
 
 let domUpdates = {
 
@@ -39,37 +47,19 @@ let domUpdates = {
     
     bookingsDisplay.insertAdjacentHTML('beforeend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
+  },
 
-    roomSearchForm.insertAdjacentHTML('afterbegin', 
+  displayDateSelection() {
+    roomSearchForm.insertAdjacentHTML('afterbegin',
       `<h2>Book A Room</h3>
       <label>Check In Date:</label>
-      <input type="date" min="${currentDate}"id="dateInput" required>`)
+      <input type="date" min="${currentDate}"id="dateInput" required>`);
   },
   
-  displayAvailableRooms(roomListings, bookingsLog) {
-    // roomCards.innerHTML = '';
-    let dateInputValue = dateInput.value.split('-').join('/');
-    let roomsToDisplay = bookingsLog.getAvailableRooms(dateInputValue, roomListings);
-    let roomsToSelect = roomsToDisplay.map(room => {
-      roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
+  displayRooms(room) {
+    roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
       <h3>${room.roomType}</h3>
-      <h4>${room.numBeds} ${room.bedSize}</h4>`)
-    })
-    return roomsToSelect
-  },
-
-  displayFilteredRooms(room) {
-    // let dateInputValue = dateInput.value.split('-').join('/');
-    // console.log('dU-64 dateInputValue', dateInputValue);
-    // const roomsByType = bookingsLog.getAvailableRoomsByType(type, dateInputValue, roomListings);
-
-    // roomsByType.forEach(room => {
-    roomCards.insertAdjacentHTML('beforeend',
-    `<article class="available-room-card" id="${room.number}">
-      <h3>${room.roomType}</h3>
-      <h4>${room.numBeds} ${room.bedSize}</h4>`)
-      
-    // })
+      <h4>${room.numBeds} ${room.bedSize}</h4>`);
   },
   
   displayBookingARoom(event, bookingARoom) {
@@ -93,21 +83,21 @@ let domUpdates = {
   },
 
   //HELPER FUNCTIONS
+
   showDashboard() {
     this.hide([logInForm, backToDashBtn, availableRooms]);
     this.show([dashboard]);
   },
   
   showAvailableRooms() {
-    roomSearchForm.innerHTML = '';
     bookingsDisplay.innerHTML = '';
-    typeInput.selectedIndex = 0;
-    this.hide([logInForm, dashboard, backToDashBtn]);
-    this.show([availableRooms, roomTypeSelection]);
+    this.hide([logInForm, dashboard]);
+    this.show([availableRooms, roomTypeSelection, backToDashBtn]);
   },
-
+  
   showFilteredRooms() {
     roomCards.innerHTML = '';
+    typeInput.selectedIndex = 0;
     this.hide([roomTypeSelection])
     this.show([backToDashBtn])
   },
