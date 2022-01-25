@@ -87,17 +87,14 @@ const selectRoomToBook = (event) => {
 
 const submitBooking = (room) => {
   let dateInputValue = getDateInputValue();
-  let selectedRoom = room;
-  // console.log('ID', bookingARoom.article[article.id])
-  // console.log('VALUE',  selected-room.id)
-  console.log(selectedRoom)
+  let selectedRoom = parseInt(document.querySelector('.selected-room').id);
   let customerBooking = {
-    userID: customer.id,
-    date: dateInputValue,
-    roomNumber: selectedRoom
+    'userID': customer.id,
+    'date': dateInputValue,
+    'roomNumber': selectedRoom
   }
   console.log(customerBooking)
-  // postBooking(customerBooking);
+  // postBooking(customerBooking).then(() => getData(customer.id));
   // domUpdates.hide([bookMyRoomBtn])
 };
 
