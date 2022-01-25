@@ -81,7 +81,7 @@ const getFilteredRooms = (event) => {
 
 const selectRoomToBook = (event) => {
   let selectedRoom = findRoom(event);
-  domUpdates.displayBookingARoom(selectedRoom);
+  domUpdates.displaySelectedRoom(selectedRoom);
   domUpdates.showRoomToBook();
 }
 
