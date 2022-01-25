@@ -30,4 +30,4 @@ const postError = (response) => {
     throw "Booking failed, please try again."
   }
   return response.json()
-}
+};
