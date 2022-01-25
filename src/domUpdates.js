@@ -32,7 +32,7 @@ let domUpdates = {
     
     customerBookings.forEach(booking => {
       bookingsDisplay.insertAdjacentHTML('beforeend',
-      `<article>
+      `<article class="booking-post">
       <li>Date: ${booking.date}</li>
       <li>Room Number: ${booking.roomNumber}</li>
       <li>Confirmation Number: ${booking.id}</li>
@@ -60,24 +60,17 @@ let domUpdates = {
     noMatches.innerText = statement;
   },
   
-  displayBookingARoom(room) {
-    // let customerRoomChoices = this.displayAvailableRooms(logInForm, roomListings, bookingsLog)
-    // roomListings.hotelRooms.find(room => {
-    //   if (event.target.id === room.number) {
-        bookingARoom.insertAdjacentHTML('afterbegin',
-          `<article class="selected-room" id="${room.number}">
-          <h3>${room.roomType}</h3>
-          <h4>Features</h4>
-          <ul>
-          <li>Bidet: ${room.bidet} </li>
-          <li>${room.numBeds} ${room.bedSize}</li>
-          </ul>
-          <h5>Cost Per Night: ${room.costPerNight}</h5>
-          </article>`)
-      
-      // return room
-    // })
-    
+  displaySelectedRoom(room) {
+    bookingARoom.insertAdjacentHTML('afterbegin',
+      `<article class="selected-room" id="${room.number}">
+      <h3>${room.roomType}</h3>
+      <h4>Features</h4>
+      <ul>
+      <li>Bidet: ${room.bidet} </li>
+      <li>${room.numBeds} ${room.bedSize}</li>
+      </ul>
+      <h5>Cost Per Night: ${room.costPerNight}</h5>
+      </article>`)
   },
 
   //HELPER FUNCTIONS
