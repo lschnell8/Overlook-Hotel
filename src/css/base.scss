@@ -45,10 +45,13 @@ div {
   justify-content: space-between;
 }
 
-
 .bookings-display {
   flex: 1;
   padding-left: .5em;
+}
+
+.booking-post {
+  margin: 1em 0 0 1em;
 }
 
 .amount-spent {
