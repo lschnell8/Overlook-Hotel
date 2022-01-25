@@ -76,7 +76,7 @@ let domUpdates = {
   //HELPER FUNCTIONS
 
   showDashboard() {
-    this.hide([logInForm, backToDashBtn, availableRooms]);
+    this.hide([logInForm, backToDashBtn, availableRooms, bookingARoom]);
     this.show([dashboard]);
   },
   

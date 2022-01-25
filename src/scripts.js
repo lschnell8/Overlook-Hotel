@@ -94,8 +94,8 @@ const submitBooking = (room) => {
     'roomNumber': selectedRoom
   }
   console.log(customerBooking)
-  // postBooking(customerBooking).then(() => getData(customer.id));
-  // domUpdates.hide([bookMyRoomBtn])
+  postBooking(customerBooking).then(() => getData(customer.id));
+  domUpdates.hide([bookMyRoomBtn])
 };
 
 
