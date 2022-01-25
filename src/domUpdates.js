@@ -1,108 +1,106 @@
-import { logInForm, date, currentDate, roomTypeInput, bookingsLog, roomListings, customer } from './scripts.js'
+import { currentDate } from './scripts.js'
+
 //QUERY SELECTORS
 const dashboard = document.getElementById('dashboard');
 const bookingsDisplay = document.querySelector('.bookings-display');
 const availableRooms = document.getElementById('availableRooms');
-const roomCards = document.getElementById('roomCards')
+const roomCards = document.getElementById('roomCards');
+// const loginError = document.getElementById('loginError');
 const bookingARoom = document.getElementById('bookingARoom');
+const roomSearchForm = document.getElementById('roomSearch');
+
+const logInForm = document.getElementById('logInForm');
+const roomTypeSelection = document.getElementById('roomTypeSelection');
+// const filterByTypeBtn = document.getElementById('filterByType');
+// const findAvailableRoomsBtn = document.getElementById('findAvailableRoomsBtn');
+const backToDashBtn = document.getElementById('backToDashBtn');
+// const bookMyRoomBtn = document.getElementById('bookMyRoomBtn');
+
+
 
 let domUpdates = {
-  
+
   //DISPLAY FUNCTIONS
-  
-  displayInputError(inputType) { 
-    // console.log(inputType.id)
-    let type = inputType.id.toString();
-    let message = type.split('i')[0]
-    inputType.insertAdjacentHTML('beforebegin', `<p>*Please enter a valid ${message}*</p>`)
+  displayError(errorType) { 
+    this.show([errorType])
   },
   
-  displayDashboard(customer, bookingsLog, roomListings, logInForm) {
-    let amount = bookingsLog.calculateTotalSpent(roomListings, customer);
-    let customerBookings = bookingsLog.getCustomerBookings(customer);
+  displayDashboard(customer, amount, customerBookings) {
     bookingsDisplay.insertAdjacentHTML('afterbegin',
     `<h1>Hi ${customer.name.split(' ')[0]}!</h1>
     <h3> My Bookings </h3>`);
     
     customerBookings.forEach(booking => {
       bookingsDisplay.insertAdjacentHTML('beforeend',
-      `<article>
+      `<article class="booking-post">
       <li>Date: ${booking.date}</li>
       <li>Room Number: ${booking.roomNumber}</li>
       <li>Confirmation Number: ${booking.id}</li>
       </article>`)
     });
     
-    bookingsDisplay.insertAdjacentHTML('afterend',
+    bookingsDisplay.insertAdjacentHTML('beforeend',
       `<h2 class="amount-spent" id="amountSpent">You have spent $${amount.toFixed(2)} on rooms!</h2>`);
+  },
 
-    findAvailableRoomsBtn.insertAdjacentHTML('beforebegin', `<input type="date" min="${currentDate}"id="dateInput" required>`)
-    
-    this.hide([logInForm]);
+  displayDateSelection() {
+    roomSearchForm.insertAdjacentHTML('afterbegin',
+      `<h2>Book A Room</h3>
+      <label>Check In Date:</label>
+      <input type="date" min="${currentDate}"id="dateInput" required>`);
+  },
+  
+  displayRooms(room) {
+    roomCards.insertAdjacentHTML('beforeend', `<article class="available-room-card" id="${room.number}">
+      <h3>${room.roomType}</h3>
+      <h4>${room.numBeds} ${room.bedSize}</h4>`);
+  },
+
+  displayMessage(statement) {
+    noMatches.innerText = statement;
+  },
+  
+  displaySelectedRoom(room) {
+    bookingARoom.insertAdjacentHTML('afterbegin',
+      `<article class="selected-room" id="${room.number}">
+      <h3>${room.roomType}</h3>
+      <h4>Features</h4>
+      <ul>
+      <li>Bidet: ${room.bidet} </li>
+      <li>${room.numBeds} ${room.bedSize}</li>
+      </ul>
+      <h5>Cost Per Night: ${room.costPerNight}</h5>
+      </article>`)
+  },
+
+  //HELPER FUNCTIONS
+
+  showDashboard() {
+    this.hide([logInForm, backToDashBtn, availableRooms, bookingARoom]);
     this.show([dashboard]);
   },
   
-  displayAvailableRooms(logInForm, roomListings, bookingsLog, inputDate) {
-    // roomCards.innerHTML = '';
-    let roomsToDisplay = bookingsLog.getAvailableRooms(inputDate, roomListings);
-    roomsToDisplay.forEach(room => {
-      availableRooms.insertAdjacentHTML('beforeend', `<article class="available-room-card">
-      <h3>${room.roomType}</h3>
-      <h4>${room.numBeds} ${room.bedSize}</h4>`)
-    })
-    // roomCards.innerHTML +=`<article class="available-room-card">
-    // <h3>${room.roomType}</h3>
-    // <h4>${room.numBeds} ${room.bedSize}</h4>`
-    
+  showAvailableRooms() {
+    bookingsDisplay.innerHTML = '';
     this.hide([logInForm, dashboard]);
-    this.show([availableRooms]);
+    this.show([availableRooms, roomTypeSelection, backToDashBtn]);
+  },
+  
+  showFilteredRooms() {
+    roomCards.innerHTML = '';
+    typeInput.selectedIndex = 0;
+    this.hide([roomTypeSelection])
+    this.show([backToDashBtn])
   },
 
-  displayFilteredRooms(roomListings) {
-    const availableRooms = bookingsLog.getAvailableRooms(date, roomListings);
-    
-    availableRooms.forEach(room => {
-      roomCards.innerHTML += `<article class="available-room-card">
-      <h3>${room.roomType}</h3>
-      <h4>${room.numBeds} ${room.bedSize}</h4>`
-
-      this.hide([logInForm])
-      this.show([availableRooms])
-    })
-  },
-  
-  displayBookingARoom(event, logInForm, dashboard, bookingARoom, backToDashBtn) {
-    roomListings.find(room => {
-      if (event.target.closest(room.id)) {
-        // [!room.bidet] = 'No'
-        // [room.bidet] = 'Yes'
-        if (!room.bidet) {
-          room.bidet = 'No'
-        } else {
-          room.bidet = 'Yes'
-        }
-        bookingARoom.insertAdjacentHTML('afterbegin',
-        `<article class="selected-room">
-        <h3>${room.roomType}</h3>
-        <h4>Features</h4>
-        <ul>
-        <li>Bidet: ${room.bidet} </li>
-        <li>${room.numBeds} ${room.bedSize}</li>
-        </ul>
-        <h5>Cost Per Night: ${room.costPerNight}</h5>
-        </article>`)
-      }
-    })
-    this.hide([logInForm, dashboard]);
-    this.show([bookingARoom, backToDashBtn]);
-  },
-  
-  
-  //HELPER FUNCTIONS
+  showRoomToBook() {
+    this.hide([logInForm, dashboard, availableRooms]);
+    this.show([bookingARoom]);
+  }, 
   
   show(elements) {
       elements.forEach(element => element.classList.remove('hidden'));
-    },
+  },
   
   hide(elements) {
     elements.forEach(element => element.classList.add('hidden'));

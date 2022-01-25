@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/favicon.png" type="image/x-icon">
   <title>Overlook Hotel</title>
 </head>
 
@@ -16,31 +17,31 @@
     <h1>Welcome To Overlook Hotel!</h1>
     <button class="back-to-dash-btn hidden" id="backToDashBtn">Back to My Dashboard</button>
   </header>
-  <form class="log-in" id="logIn">
+  <form class="log-in" id="logInForm">
     <h2>Please log in to continue...</h2>
-    <div>
       <label for="userName">Username:</label>
-      <input autofocus class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
+      <input class="username-input" type="text" id="usernameInput" placeholder="customer+id" required>
       <label for="password">Password:</label>
       <input class="password-input" id="passwordInput" type="password" placeholder="Password" require>
+      <p class="login-error hidden" id="loginError">*Please enter a valid username and password*</p>
       <button type="submit" id="logInBtn">Log In</button>
-    </div>
   </form>
   <section class="dash-board hidden" id="dashboard">
-    <div class="bookings-display">
-    </div>
+    <aside class="bookings-display">
+    </aside>
     <form class="room-search" id="roomSearch">
-      <h2>Book A Room</h3>
-        <label>Check In Date:</label>
-        <!-- <input type="date" id="dateInput"> -->
-        <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
-    </form>
+      <!-- <h2>Book A Room</h3>
+        <label>Check In Date:
+        </label> -->
+      </form>
+      <button type="submit" id="findAvailableRoomsBtn">Find Available Rooms</button>
+      <p class="search-date hidden" id="searchDate">Please select a check-in date</p>
   </section>
   <section class="available-rooms hidden" id="availableRooms">
     <form id="roomTypeSelection">
       <label>See Only Options For:
-        <select class="input" id="typeInput" placeholder="Make A Selection" name="room options">
-          <!-- <option value="0" id="noSelection"></option> -->
+        <select class="input" id="typeInput" name="room options">
+          <option value="false">Select an Option</option>
           <option value="single room">Single Room</option>
           <option value="suite">Suite</option>
           <option value="junior suite">Junior Suite</option>
@@ -48,26 +49,16 @@
         </select>
       </label>
       <button type="submit" id="filterByType">Filter By Type</button>
+      <p class="filter-error hidden" id="filterError">You must select a type if you want to filter</p>
     </form>
+    <h2 id="noMatches"></h2>
     <div class="room-cards" id="roomCards">
     </div>
   </section>
   </section>
   <section class="booking-a-room hidden" id="bookingARoom">
-    <!-- <article class="selected-room"> -->
-    <!-- Remove these articles after styling and insertAdjacentHTML in domUpdates -->
-    <!-- <h3>Room Type</h3>
-      <h4>Features</h4>
-      <ul>
-        <li>Bidet</li>
-        <li>numBeds and bedSize</li>
-      </ul>
-      <h5>costPerNight</h5>
-    </article> -->
     <button id="bookMyRoomBtn">Book My Room</button>
   </section>
-
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
 </body>

@@ -1,20 +1,20 @@
 //GET
 export const fetchApiData = (type, id) => {
+  let dataRequest;
   if (!id) {
-    return fetch(`http://localhost:3001/api/v1/${type}`)
-      .then((response) =>
-        response.json())
-      .catch(error => console.log('fetch error', error))
+    dataRequest = `http://localhost:3001/api/v1/${type}`
+
   } else {
-    return fetch(`http://localhost:3001/api/v1/${type}/${id}`)
-      .then((response) =>
-        response.json())
-      .catch(error => console.log('fetch error', error))
+   dataRequest = `http://localhost:3001/api/v1/${type}/${id}`
   }
+  return fetch(`${dataRequest}`)
+    .then((response) =>
+      response.json())
+    .catch(error => console.log('fetch error', error))
 };
 
 //POST
-const submitBooking = (customerBooking) => {
+export const postBooking = (customerBooking) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     headers: {
@@ -22,5 +22,12 @@ const submitBooking = (customerBooking) => {
     },
     body: JSON.stringify(customerBooking)
   })
-    .then(response => response.json())
+    .then(response => postError(response))
+};
+
+const postError = (response) => {
+  if (!response.ok) {
+    throw "Booking failed, please try again."
+  }
+  return response.json()
 };
